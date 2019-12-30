@@ -5,7 +5,9 @@ import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:with_flutter/authentication_bloc/authentication.dart';
 import 'package:with_flutter/home/home.dart';
+import 'package:with_flutter/model/feed.dart';
 import 'package:with_flutter/model/jobInfo.dart';
+import 'package:with_flutter/model/models.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final AuthenticationBloc _authenticationBloc;
@@ -33,31 +35,26 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   @override
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
+    print("]-----] MembersTopLoad event [-----[ ${event}");
     if (event is JobInfosLoad) {
       yield* _mapJobInfosLoadToState(event.size);
-    }
-    if (event is JobInfosEmpty) {
+    } else if (event is JobInfosEmpty) {
       yield* _mapJobInfosEmptyToState();
     }
   }
 
   Stream<HomeState> _mapJobInfosLoadToState(int size) async* {
-//    print("]-----] _mapJobInfosLoadToState.size [-----[ ${size}");
     yield HomeState.jobInfosLoading();
     try {
-      final response =
-          await _authenticationBloc.get('/api/jobinfo?page=1&pageSize=$size');
-//          await _authenticationBloc.get('/api/jobinfo?page=1&pageSize=$size');
-
+      final response = await _authenticationBloc.get('/api/jobinfomain');
       final contents = response['content'] as List;
-//      print("]-----] _mapJobInfosLoadToState.response [-----[ ${contents}");
       final List<JobInfo> jobInfos = contents.map((data) {
         return JobInfo.fromJson(data);
       }).toList();
       print("]-----] _mapJobInfosLoadToState.jobInfos [-----[ ${jobInfos}");
-      yield HomeState.jobInfosLoadSuccess(jobInfos);
+      yield state.jobInfosLoaedSuccess(jobInfos: jobInfos);
     } catch (error) {
-            print("]-----] _mapJobInfosLoadToState.error [-----[ ${error}");
+      print("]-----] _mapJobInfosLoadToState.error [-----[ ${error}");
       yield HomeState.jobInfosLoadFailure();
     }
   }

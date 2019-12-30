@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:with_flutter/common/empty.dart';
 import 'package:with_flutter/model/club.dart';
 
 class ClubMember extends StatelessWidget {
@@ -70,10 +71,7 @@ class ClubMember extends StatelessWidget {
                     ),
                   ],
                 )
-              : Text(
-                  "",
-                  style: TextStyle(height: 0),
-                ),
+              : EmptyWidget(),
         ],
       ),
     );

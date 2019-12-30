@@ -19,7 +19,7 @@ class FeedCard extends StatelessWidget {
     initialVideoId: 'iLnmTe5Q2Qw',
     flags: YoutubePlayerFlags(
       autoPlay: false,
-      mute: true,
+      mute: false,
     ),
   );
 

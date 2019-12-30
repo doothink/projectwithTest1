@@ -23,7 +23,6 @@ class JobInfosLoad extends HomeEvent {
 }
 
 class JobInfosEmpty extends HomeEvent {
-
   @override
   List<Object> get props => [];
 

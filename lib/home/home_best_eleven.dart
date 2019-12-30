@@ -1,8 +1,14 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:with_flutter/common/common.dart';
+import 'package:with_flutter/authentication_bloc/authentication_bloc.dart';
+import 'package:with_flutter/common/empty.dart';
 import 'package:with_flutter/home/home.dart';
+import 'package:with_flutter/model/member.dart';
+
+import 'bloc_best/bloc.dart';
+import 'bloc_best/home_best_bloc.dart';
+import 'home_best_avatar.dart';
 
 class HomeBestEleven extends StatefulWidget {
   HomeBestEleven({
@@ -13,377 +19,252 @@ class HomeBestEleven extends StatefulWidget {
 }
 
 class _HomeBestElevenState extends State<HomeBestEleven> {
-  HomeBloc _homeBloc;
+  HomeBestBloc _homeBestBloc;
 
   @override
   void initState() {
     super.initState();
-    _homeBloc = BlocProvider.of<HomeBloc>(context);
+    _homeBestBloc = HomeBestBloc(
+        authenticationBloc: BlocProvider.of<AuthenticationBloc>(context));
+    _homeBestBloc.add(MembersLoad(size: 11));
   }
+
+  Member _member1;
+  Member _member2;
+  Member _member3;
+  Member _member4;
+  Member _member5;
+  Member _member6;
+  Member _member7;
+  Member _member8;
+  Member _member9;
+  Member _member10;
+  Member _member11;
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<HomeBloc, HomeState>(
-      listener: (context, state) {},
-      child: BlocBuilder<HomeBloc, HomeState>(
-        builder: (context, state) {
-          return SingleChildScrollView(
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.only(
-                  top: 10.0, bottom: 10.0, left: 15.0, right: 15.0),
+    return BlocProvider<HomeBestBloc>(
+      builder: (context) => _homeBestBloc,
+      child: BlocListener<HomeBestBloc, HomeBestState>(
+        listener: (context, state) {
+          if (state.isLoaded) {
+            if (state.members.length > 0) {
+              _member1 = state.members[0];
+            }
+            if (state.members.length > 1) {
+              _member2 = state.members[1];
+            }
+            if (state.members.length > 2) {
+              _member3 = state.members[2];
+            }
+            if (state.members.length > 3) {
+              _member4 = state.members[3];
+            }
+            if (state.members.length > 4) {
+              _member5 = state.members[4];
+            }
+            if (state.members.length > 5) {
+              _member6 = state.members[5];
+            }
+            if (state.members.length > 6) {
+              _member7 = state.members[6];
+            }
+            if (state.members.length > 7) {
+              _member8 = state.members[7];
+            }
+            if (state.members.length > 8) {
+              _member9 = state.members[8];
+            }
+            if (state.members.length > 9) {
+              _member10 = state.members[9];
+            }
+            if (state.members.length > 10) {
+              _member11 = state.members[10];
+            }
+          }
+        },
+        child: BlocBuilder<HomeBestBloc, HomeBestState>(
+          builder: (context, state) {
+            return SingleChildScrollView(
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.only(
+                    top: 10.0, bottom: 10.0, left: 15.0, right: 15.0),
 //              height: 345.0,
-              decoration: BoxDecoration(color: Color.fromRGBO(62, 62, 62, 1)),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    "Best Eleven",
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: "NotoSansCJKkr-Bold",
-                      fontStyle: FontStyle.normal,
-                      fontSize: 17.0,
+                decoration: BoxDecoration(color: Color.fromRGBO(62, 62, 62, 1)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      "Best Eleven",
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: "NotoSansCJKkr-Bold",
+                        fontStyle: FontStyle.normal,
+                        fontSize: 17.0,
+                      ),
                     ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(
-                      top: 3.0,
-                    ),
-                    child: Stack(children: <Widget>[
-                      Container(
-                        height: 280.0,
-                        child: Center(
-                          child: Container(
-                            height: 240.0,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                fit: BoxFit.fill,
-                                image: AssetImage(
-                                    'assets/images/main/soccerField@3x.png'),
+                    Container(
+                      padding: EdgeInsets.only(
+                        top: 3.0,
+                      ),
+                      child: Stack(children: <Widget>[
+                        Container(
+                          height: 280.0,
+                          child: Center(
+                            child: Container(
+                              height: 240.0,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  fit: BoxFit.fill,
+                                  image: AssetImage(
+                                      'assets/images/main/soccerField@3x.png'),
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                      Positioned(
-                        top: 0.0,
-                        left: MediaQuery.of(context).size.width * 0.3,
-                        child: Container(
+                        Positioned(
+                          top: 0.0,
+                          left: MediaQuery.of(context).size.width * 0.3,
+                          child: Container(
 //                              padding: const EdgeInsets.only(bottom: 20.0),
-                          child: Center(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Image(
-                                  image: AssetImage(
-                                      'assets/images/dump/379Ba1043C2B8A96Ee4E0A8C75F0A2E1@3x.png'),
-                                  width: 43,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 2.0),
-                                  child: Text(
-                                    "Ulsan FC",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 8),
-                                  ),
-                                ),
-                              ],
-                            ),
+                            child: _member1 != null
+                                ? HomeBestAvatar(
+                                    member: _member1,
+                                  )
+                                : EmptyWidget(),
                           ),
                         ),
-                      ),
-                      Positioned(
-                        top: 0.0,
-                        right: MediaQuery.of(context).size.width * 0.3,
-                        child: Container(
+                        Positioned(
+                          top: 0.0,
+                          right: MediaQuery.of(context).size.width * 0.3,
+                          child: Container(
 //                              padding: const EdgeInsets.only(bottom: 20.0),
-                          child: Center(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Image(
-                                  image: AssetImage(
-                                      'assets/images/dump/lockerroom@3x.png'),
-                                  width: 43,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 2.0),
-                                  child: Text(
-                                    "Lockerroom",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 8),
-                                  ),
-                                ),
-                              ],
-                            ),
+                            child: _member2 != null
+                                ? HomeBestAvatar(
+                                    member: _member2,
+                                  )
+                                : EmptyWidget(),
                           ),
                         ),
-                      ),
-                      Positioned(
-                        top: 52.0,
-                        left: MediaQuery.of(context).size.width * 0.14,
-                        child: Container(
+                        Positioned(
+                          top: 52.0,
+                          left: MediaQuery.of(context).size.width * 0.14,
+                          child: Container(
 //                              padding: const EdgeInsets.only(bottom: 20.0),
-                          child: Center(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Image(
-                                  image: AssetImage(
-                                      'assets/images/dump/om2S821F93Sfwhwg7Xmd@3x.png'),
-                                  width: 43,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 2.0),
-                                  child: Text(
-                                    "Son H",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 8),
-                                  ),
-                                ),
-                              ],
-                            ),
+                            child: _member3 != null
+                                ? HomeBestAvatar(
+                                    member: _member3,
+                                  )
+                                : EmptyWidget(),
                           ),
                         ),
-                      ),
-                      Positioned(
-                        top: 52.0,
-                        left: MediaQuery.of(context).size.width * 0.416,
-                        child: Container(
+                        Positioned(
+                          top: 52.0,
+                          left: MediaQuery.of(context).size.width * 0.416,
+                          child: Container(
 //                              padding: const EdgeInsets.only(bottom: 20.0),
-                          child: Center(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Image(
-                                  image: AssetImage(
-                                      'assets/images/dump/naverbookingPhinfPstatic@3x.png'),
-                                  width: 43,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 2.0),
-                                  child: Text(
-                                    "Jiheon L",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 8),
-                                  ),
-                                ),
-                              ],
-                            ),
+                            child: _member4 != null
+                                ? HomeBestAvatar(
+                                    member: _member4,
+                                  )
+                                : EmptyWidget(),
                           ),
                         ),
-                      ),
-                      Positioned(
-                        top: 52.0,
-                        right: MediaQuery.of(context).size.width * 0.14,
-                        child: Container(
+                        Positioned(
+                          top: 52.0,
+                          right: MediaQuery.of(context).size.width * 0.14,
+                          child: Container(
 //                              padding: const EdgeInsets.only(bottom: 20.0),
-                          child: Center(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Image(
-                                  image: AssetImage(
-                                      'assets/images/dump/naverbookingPhinfPstatic@3x.png'),
-                                  width: 43,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 2.0),
-                                  child: Text(
-                                    "JEB Ent.",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 8),
-                                  ),
-                                ),
-                              ],
-                            ),
+                            child: _member5 != null
+                                ? HomeBestAvatar(
+                                    member: _member5,
+                                  )
+                                : EmptyWidget(),
                           ),
                         ),
-                      ),
-                      Positioned(
-                        top: 102.0,
-                        left: MediaQuery.of(context).size.width * 0.3,
-                        child: Container(
+                        Positioned(
+                          top: 102.0,
+                          left: MediaQuery.of(context).size.width * 0.3,
+                          child: Container(
 //                              padding: const EdgeInsets.only(bottom: 20.0),
-                          child: Center(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Image(
-                                  image: AssetImage(
-                                      'assets/images/dump/1200PxJapanNationalFootballTeamCrestSvg@3x.png'),
-                                  width: 43,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 2.0),
-                                  child: Text(
-                                    "JEB Ent.",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 8),
-                                  ),
-                                ),
-                              ],
-                            ),
+                            child: _member6 != null
+                                ? HomeBestAvatar(
+                                    member: _member6,
+                                  )
+                                : EmptyWidget(),
                           ),
                         ),
-                      ),
-                      Positioned(
-                        top: 102.0,
-                        right: MediaQuery.of(context).size.width * 0.3,
-                        child: Container(
+                        Positioned(
+                          top: 102.0,
+                          right: MediaQuery.of(context).size.width * 0.3,
+                          child: Container(
 //                              padding: const EdgeInsets.only(bottom: 20.0),
-                          child: Center(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Image(
-                                  image: AssetImage(
-                                      'assets/images/dump/manchesterCityFcMatches600X375@3x.png'),
-                                  width: 43,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 2.0),
-                                  child: Text(
-                                    "JEB Ent.",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 8),
-                                  ),
-                                ),
-                              ],
-                            ),
+                            child: _member7 != null
+                                ? HomeBestAvatar(
+                                    member: _member7,
+                                  )
+                                : EmptyWidget(),
                           ),
                         ),
-                      ),
-                      Positioned(
-                        top: 162.0,
-                        left: MediaQuery.of(context).size.width * 0.14,
-                        child: Container(
+                        Positioned(
+                          top: 162.0,
+                          left: MediaQuery.of(context).size.width * 0.14,
+                          child: Container(
 //                              padding: const EdgeInsets.only(bottom: 20.0),
-                          child: Center(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Image(
-                                  image: AssetImage(
-                                      'assets/images/dump/i@3x.png'),
-                                  width: 43,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 2.0),
-                                  child: Text(
-                                    "JEB Ent.",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 8),
-                                  ),
-                                ),
-                              ],
-                            ),
+                            child: _member8 != null
+                                ? HomeBestAvatar(
+                                    member: _member8,
+                                  )
+                                : EmptyWidget(),
                           ),
                         ),
-                      ),
-                      Positioned(
-                        top: 150.0,
-                        left: MediaQuery.of(context).size.width * 0.416,
-                        child: Container(
+                        Positioned(
+                          top: 150.0,
+                          left: MediaQuery.of(context).size.width * 0.416,
+                          child: Container(
 //                              padding: const EdgeInsets.only(bottom: 20.0),
-                          child: Center(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Image(
-                                  image: AssetImage(
-                                      'assets/images/dump/ie002204851Std@3x.png'),
-                                  width: 43,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 2.0),
-                                  child: Text(
-                                    "Hwang H",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 8),
-                                  ),
-                                ),
-                              ],
-                            ),
+                            child: _member9 != null
+                                ? HomeBestAvatar(
+                                    member: _member9,
+                                  )
+                                : EmptyWidget(),
                           ),
                         ),
-                      ),
-                      Positioned(
-                        top: 162.0,
-                        right: MediaQuery.of(context).size.width * 0.14,
-                        child: Container(
+                        Positioned(
+                          top: 162.0,
+                          right: MediaQuery.of(context).size.width * 0.14,
+                          child: Container(
 //                              padding: const EdgeInsets.only(bottom: 20.0),
-                          child: Center(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Image(
-                                  image: AssetImage(
-                                      'assets/images/dump/img@3x.png'),
-                                  width: 43,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 2.0),
-                                  child: Text(
-                                    "Stella J",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 8),
-                                  ),
-                                ),
-                              ],
-                            ),
+                            child: _member10 != null
+                                ? HomeBestAvatar(
+                                    member: _member10,
+                                  )
+                                : EmptyWidget(),
                           ),
                         ),
-                      ),
-                      Positioned(
-                        top: 220.0,
-                        left: MediaQuery.of(context).size.width * 0.416,
-                        child: Container(
+                        Positioned(
+                          top: 220.0,
+                          left: MediaQuery.of(context).size.width * 0.416,
+                          child: Container(
 //                              padding: const EdgeInsets.only(bottom: 20.0),
-                          child: Center(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Image(
-                                  image: AssetImage(
-                                      'assets/images/dump/oJik3Rl@3x.png'),
-                                  width: 43,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 2.0),
-                                  child: Text(
-                                    "Seoul FC",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 8),
-                                  ),
-                                ),
-                              ],
-                            ),
+                            child: _member11 != null
+                                ? HomeBestAvatar(
+                                    member: _member11,
+                                  )
+                                : EmptyWidget(),
                           ),
                         ),
-                      ),
-                    ]),
-                  ),
-
-
-                ],
+                      ]),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

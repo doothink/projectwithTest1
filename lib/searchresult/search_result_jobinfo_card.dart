@@ -55,14 +55,19 @@ class SearchResultJobInfoCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   GestureDetector(
-                    child: CachedNetworkImage(
-                      height: 37.0,
-                      width: 37.0,
-                      imageUrl: _jobInfo.club.symbolImageUrl,
-                      placeholder: (context, url) =>
-                          new CircularProgressIndicator(),
-                      errorWidget: (context, url, error) =>
-                          new Icon(Icons.error),
+                    child: CircleAvatar(
+                      child: ClipOval(
+                        child: CachedNetworkImage(
+                          height: 37.0,
+                          width: 37.0,
+                          imageUrl: _jobInfo.club.symbolImageUrl,
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) =>
+                              new CircularProgressIndicator(),
+                          errorWidget: (context, url, error) =>
+                              new Icon(Icons.error),
+                        ),
+                      ),
                     ),
                     onTap: () {
                       Navigator.push(

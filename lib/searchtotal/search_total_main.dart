@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:with_flutter/club/club_screen.dart';
 import 'package:with_flutter/common/empty.dart';
 import 'package:with_flutter/searchresult/search_result_jobinfo_card.dart';
 
@@ -92,49 +93,54 @@ class _SearchTotalMainState extends State<SearchTotalMain> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: state.members
                                         .map((item) => Container(
-                                              margin: EdgeInsets.only(right: 4),
+                                              margin:
+                                                  EdgeInsets.only(right: 10),
                                               child: Column(
                                                 children: <Widget>[
-                                                  CircleAvatar(
-                                                    radius: 42.5,
-                                                    child: ClipOval(
-                                                      child: item.memberProfile
-                                                                      .mediaCollections !=
-                                                                  null &&
-                                                              item.memberProfile
-                                                                          .mediaCollections[
-                                                                      0] !=
-                                                                  null &&
-                                                              item
-                                                                      .memberProfile
-                                                                      .mediaCollections[
-                                                                          0]
-                                                                      .fullPathS3 !=
-                                                                  null
-                                                          ? CachedNetworkImage(
-                                                              width: 85.0,
-                                                              height: 85.0,
-                                                              imageUrl: item
-                                                                  .memberProfile
-                                                                  .mediaCollections[
-                                                                      0]
-                                                                  .fullPathS3,
-                                                              fit: BoxFit.cover,
-                                                              placeholder: (context,
-                                                                      url) =>
-                                                                  new CircularProgressIndicator(),
-                                                              errorWidget: (context,
-                                                                      url,
-                                                                      error) =>
-                                                                  new Icon(Icons
-                                                                      .error),
-                                                            )
-                                                          : Image.asset(
-                                                              'assets/images/nophoto@3x.png',
-                                                              width: 85.0,
-                                                              height: 85.0,
-                                                              fit: BoxFit.cover,
-                                                            ),
+                                                  GestureDetector(
+                                                    child: CircleAvatar(
+                                                      radius: 42.5,
+                                                      child: ClipOval(
+                                                        child: item.memberProfile
+                                                                        .mediaCollections !=
+                                                                    null &&
+                                                                item.memberProfile
+                                                                            .mediaCollections[
+                                                                        0] !=
+                                                                    null &&
+                                                                item
+                                                                        .memberProfile
+                                                                        .mediaCollections[
+                                                                            0]
+                                                                        .fullPathS3 !=
+                                                                    null
+                                                            ? CachedNetworkImage(
+                                                                width: 85.0,
+                                                                height: 85.0,
+                                                                imageUrl: item
+                                                                    .memberProfile
+                                                                    .mediaCollections[
+                                                                        0]
+                                                                    .fullPathS3,
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                                placeholder: (context,
+                                                                        url) =>
+                                                                    new CircularProgressIndicator(),
+                                                                errorWidget: (context,
+                                                                        url,
+                                                                        error) =>
+                                                                    new Icon(Icons
+                                                                        .error),
+                                                              )
+                                                            : Image.asset(
+                                                                'assets/images/nophoto@3x.png',
+                                                                width: 85.0,
+                                                                height: 85.0,
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                              ),
+                                                      ),
                                                     ),
                                                   ),
                                                   Text(item.nickName)
@@ -191,47 +197,72 @@ class _SearchTotalMainState extends State<SearchTotalMain> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: state.clubs
                                         .map((item) => Container(
-                                              margin: EdgeInsets.only(right: 4),
+                                              margin:
+                                                  EdgeInsets.only(right: 10),
                                               child: Column(
                                                 children: <Widget>[
-                                                  CircleAvatar(
-                                                    radius: 42.5,
-                                                    child: ClipOval(
-                                                      child: item
-                                                                      .mediaCollections !=
-                                                                  null &&
-                                                              item.mediaCollections[
-                                                                      0] !=
-                                                                  null &&
-                                                              item.mediaCollections[0]
-                                                                      .fullPathS3 !=
-                                                                  null
-                                                          ? CachedNetworkImage(
-                                                              width: 85.0,
-                                                              height: 85.0,
-                                                              imageUrl: item
-                                                                  .mediaCollections[
-                                                                      0]
-                                                                  .fullPathS3,
-                                                              fit: BoxFit.cover,
-                                                              placeholder: (context,
-                                                                      url) =>
-                                                                  new CircularProgressIndicator(),
-                                                              errorWidget: (context,
-                                                                      url,
-                                                                      error) =>
-                                                                  new Icon(Icons
-                                                                      .error),
-                                                            )
-                                                          : Image.asset(
-                                                              'assets/images/nophoto@3x.png',
-                                                              width: 85.0,
-                                                              height: 85.0,
-                                                              fit: BoxFit.cover,
-                                                            ),
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder:
+                                                                (context) =>
+                                                                    ClubScreen(
+                                                                      clubId:
+                                                                          item.id,
+                                                                    )),
+                                                      );
+                                                    },
+                                                    child: CircleAvatar(
+                                                      radius: 42.5,
+                                                      child: ClipOval(
+                                                        child: item.symbolImageUrl !=
+                                                                null
+                                                            ? CachedNetworkImage(
+                                                                width: 85.0,
+                                                                height: 85.0,
+                                                                imageUrl: item
+                                                                    .symbolImageUrl,
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                                placeholder: (context,
+                                                                        url) =>
+                                                                    new CircularProgressIndicator(),
+                                                                errorWidget: (context,
+                                                                        url,
+                                                                        error) =>
+                                                                    new Icon(Icons
+                                                                        .error),
+                                                              )
+                                                            : Image.asset(
+                                                                'assets/images/nophoto@3x.png',
+                                                                width: 85.0,
+                                                                height: 85.0,
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                              ),
+                                                      ),
                                                     ),
                                                   ),
-                                                  Text(item.name)
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 6.0),
+                                                    child: Text(
+                                                      item.name,
+                                                      style: const TextStyle(
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontFamily:
+                                                            "NotoSansCJKkr-Medium",
+                                                        fontStyle:
+                                                            FontStyle.normal,
+                                                        fontSize: 13.0,
+                                                      ),
+                                                    ),
+                                                  )
                                                 ],
                                               ),
                                             ))
@@ -283,7 +314,7 @@ class _SearchTotalMainState extends State<SearchTotalMain> {
                                 mainAxisSpacing: 4,
                                 crossAxisSpacing: 4,
                                 crossAxisCount: 2,
-//                        childAspectRatio: 0.95,
+                                childAspectRatio: 0.9,
                                 children: List.generate(state.jobInfos.length,
                                     (index) {
                                   return SearchResultJobInfoCard(

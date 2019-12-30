@@ -217,7 +217,7 @@ class _RegisterFormState extends State<RegisterForm> {
                           controller: _passwordController,
                           decoration: InputDecoration(
                             contentPadding: const EdgeInsets.only(bottom: 6.5),
-                            labelText: '비밀번호(6자리 이상)',
+                            labelText: '비밀번호(8자리 이상)',
                             labelStyle: TextStyle(
                               fontSize: 13,
                               color: const Color.fromRGBO(208, 208, 208, 1),

@@ -13,9 +13,9 @@ class AuthenticationBloc
   final UserRepository _userRepository;
   final http.Client _httpClient;
 
-//  final String apiUrl = API_URL_LOCAL;
+  final String apiUrl = API_URL_LOCAL;
 
-  final String apiUrl = API_URL_DEV;
+//  final String apiUrl = API_URL_DEV;
 //  final String apiUrl = API_URL_PROD;
 
   AuthenticationBloc({
@@ -43,7 +43,7 @@ class AuthenticationBloc
   }
 
   Stream<AuthenticationState> _mapAppStartedToState() async* {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 3));
     try {
       final isSignedIn = await _userRepository.isSignedIn();
       if (isSignedIn) {

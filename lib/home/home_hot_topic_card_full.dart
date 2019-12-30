@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:with_flutter/authentication_bloc/authentication_bloc.dart';
 import 'package:with_flutter/home/home.dart';
 import 'package:with_flutter/model/with_card.dart';
 
-class HomeHotTopicCard extends StatefulWidget {
+class HomeHotTopicCardFull extends StatefulWidget {
   final WithCard _withCard;
 
-  HomeHotTopicCard({Key key, @required WithCard withCard})
+  HomeHotTopicCardFull({Key key, @required WithCard withCard})
       : assert(withCard != null),
         _withCard = withCard,
         super(key: key);
 
-  State<HomeHotTopicCard> createState() => _HomeHotTopicCardState();
+  State<HomeHotTopicCardFull> createState() => _HomeHotTopicCardFullState();
 }
 
-class _HomeHotTopicCardState extends State<HomeHotTopicCard> {
+class _HomeHotTopicCardFullState extends State<HomeHotTopicCardFull> {
   HomeBloc _homeBloc;
 
   WithCard get _withCard => widget._withCard;
@@ -23,9 +22,7 @@ class _HomeHotTopicCardState extends State<HomeHotTopicCard> {
   @override
   void initState() {
     super.initState();
-//    _homeBloc = BlocProvider.of<HomeBloc>(context);
-    _homeBloc = HomeBloc(
-        authenticationBloc: BlocProvider.of<AuthenticationBloc>(context));
+    _homeBloc = BlocProvider.of<HomeBloc>(context);
   }
 
   @override

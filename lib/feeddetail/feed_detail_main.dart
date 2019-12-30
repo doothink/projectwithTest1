@@ -74,7 +74,7 @@ class _FeedDetailMainState extends State<FeedDetailMain> {
                                             _feed.mediaCollections[0].fullPath),
                                     flags: YoutubePlayerFlags(
                                       autoPlay: false,
-                                      mute: true,
+                                      mute: false,
                                     ),
                                   ),
                                   showVideoProgressIndicator: true,

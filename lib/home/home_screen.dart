@@ -4,7 +4,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:with_flutter/authentication_bloc/bloc.dart';
 import 'package:with_flutter/feed/feed.dart';
 import 'package:with_flutter/home/home.dart';
-import 'package:with_flutter/mypage/mypage.dart';
 import 'package:with_flutter/profile/profile.dart';
 import 'package:with_flutter/search/search.dart';
 import 'package:with_flutter/wallet/wallet.dart';
@@ -114,11 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ];
 
     return Scaffold(
-      body: BlocProvider<HomeBloc>(
-        builder: (context) => HomeBloc(
-            authenticationBloc: BlocProvider.of<AuthenticationBloc>(context)),
-        child: _children[_selectedIndex],
-      ),
+      body: _children[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(

@@ -75,88 +75,89 @@ class _ProfileScreenState extends State<ProfileScreen> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: Text('Drawer Header'),
+              child: Text('WITH'),
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Colors.white,
               ),
             ),
             ListTile(
-              title: Text('Item 1'),
+              title: Text('LogOut'),
               onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
+                BlocProvider.of<AuthenticationBloc>(context).add(
+                  LoggedOut(),
+                );
                 Navigator.pop(context);
               },
             ),
-            ListTile(
-              title: Text('Item 2'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
+
           ],
         ),
       ),
       bottomSheet: isScrollingDown
           ? Container(
-              width: MediaQuery.of(context).size.width,
+        width: MediaQuery
+            .of(context)
+            .size
+            .width,
 //              height: 53,
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-              ),
-              child: Row(
-                children: <Widget>[
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.3,
-                    child: FlatButton(
-                      padding: EdgeInsets.only(top: 15, bottom: 15),
-                      shape: RoundedRectangleBorder(),
-                      color: Color.fromRGBO(195, 195, 195, 1),
-                      onPressed: () {
-                        _profileBloc
-                            .add(ProfileSaveButtonPressed(viewYn: false));
-                      },
-                      child: Text(
-                        "임시저장",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w400,
-                          fontFamily: "NotoSansCJKkr-Medium",
-                          fontStyle: FontStyle.normal,
-                          fontSize: 15.0,
-                        ),
-                      ),
-                    ),
+        decoration: BoxDecoration(
+          color: Colors.transparent,
+        ),
+        child: Row(
+          children: <Widget>[
+            SizedBox(
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width * 0.3,
+              child: FlatButton(
+                padding: EdgeInsets.only(top: 15, bottom: 15),
+                shape: RoundedRectangleBorder(),
+                color: Color.fromRGBO(195, 195, 195, 1),
+                onPressed: () {
+                  _profileBloc
+                      .add(ProfileSaveButtonPressed(viewYn: false));
+                },
+                child: Text(
+                  "임시저장",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w400,
+                    fontFamily: "NotoSansCJKkr-Medium",
+                    fontStyle: FontStyle.normal,
+                    fontSize: 15.0,
                   ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.7,
-                    child: FlatButton(
-                      padding: EdgeInsets.only(top: 15, bottom: 15),
-                      shape: RoundedRectangleBorder(),
-                      color: Color.fromRGBO(48, 190, 157, 1),
-                      onPressed: () {
-                        _profileBloc
-                            .add(ProfileSaveButtonPressed(viewYn: true));
-                      },
-                      child: Text(
-                        "입력완료",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w400,
-                          fontFamily: "NotoSansCJKkr-Medium",
-                          fontStyle: FontStyle.normal,
-                          fontSize: 15.0,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
-            )
+            ),
+            SizedBox(
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width * 0.7,
+              child: FlatButton(
+                padding: EdgeInsets.only(top: 15, bottom: 15),
+                shape: RoundedRectangleBorder(),
+                color: Color.fromRGBO(48, 190, 157, 1),
+                onPressed: () {
+                  _profileBloc
+                      .add(ProfileSaveButtonPressed(viewYn: true));
+                },
+                child: Text(
+                  "입력완료",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w400,
+                    fontFamily: "NotoSansCJKkr-Medium",
+                    fontStyle: FontStyle.normal,
+                    fontSize: 15.0,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      )
           : EmptyWidget(),
     );
   }
