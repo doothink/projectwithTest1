@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:with_flutter/authentication_bloc/bloc.dart';
+import 'package:with_flutter/common/empty.dart';
 
 import 'bloc/bloc.dart';
 import 'feed_detail.dart';
@@ -42,10 +43,7 @@ class _FeedDetailScreenState extends State<FeedDetailScreen> {
         backgroundColor: Color.fromRGBO(248, 248, 248, 1),
         bottomOpacity: 0.0,
         elevation: 0.0,
-        title: Container(
-//          alignment: Alignment.center,
-          child: _avatar != null ? _avatar : Text(""),
-        ),
+        title: _avatar != null ? _avatar : EmptyWidget(),
 //        actions: <Widget>[],
       ),
       body: BlocProvider<FeedDetailBloc>(

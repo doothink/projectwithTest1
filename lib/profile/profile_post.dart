@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:with_flutter/common/string_util.dart';
 import 'package:with_flutter/model/injuaryHistory.dart';
 import 'package:with_flutter/model/playerHistory.dart';
 import 'package:with_flutter/model/profile.dart';
@@ -307,8 +308,10 @@ class _ProfilePostState extends State<ProfilePost> {
                 _imageNetwork = state.profile.mediaCollections[0].fullPathS3;
               }
             }
-            _nickNameController.text = state.profile.nickName;
-            _realNameController.text = state.profile.realName;
+            _nickNameController.text =
+                StringUtils.defaultNull(state.profile.nickName);
+            _realNameController.text =
+                StringUtils.defaultNull(state.profile.realName);
             _countryController.text = state.profile.country;
             if (state.profile.gender != null) {
               _gender = _findGenger(state.profile.gender);
@@ -397,26 +400,12 @@ class _ProfilePostState extends State<ProfilePost> {
           print("]-----] isSaveBottonPressed [-----[ ${_gender.value}");
           _handleSubmit(state.isView);
         }
+        if (state.isLoaaing) {
+          _loadingDialog(context);
+        }
         if (state.isSaveSuccess) {
           print("]-----] isSaveSuccess [-----[");
-//          Scaffold.of(context)
-//            ..hideCurrentSnackBar()
-//            ..showSnackBar(
-//              SnackBar(
-//                content: Row(
-//                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                  children: [
-//                    Row(
-//                      children: <Widget>[
-//                        Text("저장되었습니다."),
-//                      ],
-//                    ),
-//                    Icon(Icons.info_outline)
-//                  ],
-//                ),
-//                backgroundColor: Colors.green,
-//              ),
-//            );
+//          Navigator.of(context, rootNavigator: true).pop();
         }
       },
       child: BlocBuilder<ProfileBloc, ProfileState>(
@@ -1939,6 +1928,31 @@ class _ProfilePostState extends State<ProfilePost> {
         }
         break;
     }
+  }
+
+  Future<void> _loadingDialog(BuildContext context) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Container(
+            height: 100,
+            child: Center(
+                child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                CircularProgressIndicator(),
+                Padding(
+                  padding: const EdgeInsets.only(left: 18.0),
+                  child: Text("처리중"),
+                )
+              ],
+            )),
+          ),
+        );
+      },
+    );
   }
 }
 

@@ -29,6 +29,8 @@ class JobInfo extends Equatable {
   final List<JobPreferenceQualification> jobPreferenceQualifications;
   final List<JobRequiredQualification> jobRequiredQualifications;
   final List<JobPosition> jobPositions;
+  final bool isApplied;
+  final bool isHearted;
 
   const JobInfo({
     this.id,
@@ -48,6 +50,8 @@ class JobInfo extends Equatable {
     this.jobPreferenceQualifications,
     this.jobRequiredQualifications,
     this.jobPositions,
+    this.isApplied,
+    this.isHearted,
   });
 
   factory JobInfo.fromJson(Map<String, dynamic> json) =>

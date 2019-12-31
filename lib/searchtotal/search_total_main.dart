@@ -276,6 +276,7 @@ class _SearchTotalMainState extends State<SearchTotalMain> {
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 30),
+                    padding: EdgeInsets.only(bottom: 30),
                     width: MediaQuery.of(context).size.width,
                     alignment: Alignment.centerLeft,
                     child: Column(
@@ -310,11 +311,12 @@ class _SearchTotalMainState extends State<SearchTotalMain> {
                         ),
                         state.jobInfos != null && state.jobInfos.length > 0
                             ? GridView.count(
+                                primary: false,
                                 shrinkWrap: true,
                                 mainAxisSpacing: 4,
                                 crossAxisSpacing: 4,
                                 crossAxisCount: 2,
-                                childAspectRatio: 0.9,
+//                                childAspectRatio: 0.9,
                                 children: List.generate(state.jobInfos.length,
                                     (index) {
                                   return SearchResultJobInfoCard(

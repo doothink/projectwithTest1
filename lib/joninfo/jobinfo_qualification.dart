@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:with_flutter/common/jobinfo_util.dart';
 import 'package:with_flutter/model/jobInfo.dart';
-
-import 'jobinfo_hashtag.dart';
 
 class JobInfoQualification extends StatelessWidget {
   final JobInfo _jobInfo;
@@ -16,8 +13,8 @@ class JobInfoQualification extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint(
-        "]-----] _jobInfo [----- [ ${_jobInfo.jobPreferenceQualifications}");
+//    debugPrint(
+//        "]-----] _jobInfo [----- [ ${_jobInfo.jobPreferenceQualifications}");
     return Container(
       width: MediaQuery.of(context).size.width,
       alignment: Alignment.centerLeft,
@@ -131,6 +128,7 @@ class JobInfoQualification extends StatelessWidget {
                       Container(
                         margin: EdgeInsets.only(top: 5),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: _jobInfo.jobBenefits.map((item) {
                             return Text(
                               "• ${item.benefit}",

@@ -206,11 +206,12 @@ class AuthenticationBloc
 
   Future<dynamic> basicAuth(String url, String basicToken) async {
     print(']-------] basicAuth basicToken [-------[ ${basicToken}');
+    print(']-------] basicAuth apiUrl [-------[ ${apiUrl}');
     final response = await _httpClient.get(apiUrl + url, headers: {
       "Authorization": basicToken,
       "Access-Control-Expose-Headers": "Authorization"
     });
-//    print(']-------] basicAuth call [-------[ ${response.body}');
+    print(']-------] basicAuth call [-------[ ${response.body}');
 //    print(']-------] basicAuth call [-------[ ${response.headers}');
 
 //    var result = json.decode(response.body);

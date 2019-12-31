@@ -41,6 +41,8 @@ JobInfo _$JobInfoFromJson(Map<String, dynamic> json) {
         ?.map((e) =>
             e == null ? null : JobPosition.fromJson(e as Map<String, dynamic>))
         ?.toList(),
+    isApplied: json['isApplied'] as bool,
+    isHearted: json['isHearted'] as bool,
   );
 }
 
@@ -65,4 +67,6 @@ Map<String, dynamic> _$JobInfoToJson(JobInfo instance) => <String, dynamic>{
       'jobRequiredQualifications':
           instance.jobRequiredQualifications?.map((e) => e?.toJson())?.toList(),
       'jobPositions': instance.jobPositions?.map((e) => e?.toJson())?.toList(),
+      'isApplied': instance.isApplied,
+      'isHearted': instance.isHearted,
     };

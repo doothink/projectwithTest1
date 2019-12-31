@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:with_flutter/model/member.dart';
+import 'package:with_flutter/profile_view/profile_view.dart';
 
 class HomeHomeRecommendationCard extends StatelessWidget {
   final Member _member;
@@ -19,21 +20,32 @@ class HomeHomeRecommendationCard extends StatelessWidget {
       padding: EdgeInsets.all(0.0),
       child: Column(
         children: <Widget>[
-          Container(
-            width: MediaQuery.of(context).size.width * 0.22,
-            height: 81.0,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.fill,
-                image: _member != null &&
-                        _member.memberProfile != null &&
-                        _member.memberProfile.mediaCollections != null &&
-                        _member.memberProfile.mediaCollections.length > 0
-                    ? CachedNetworkImageProvider(
-                        _member.memberProfile.mediaCollections[0].fullPathS3)
-                    : AssetImage(
-                        'assets/images/nophoto@3x.png',
-                      ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ProfileViewScreen(
+                          memberId: _member.id,
+                        )),
+              );
+            },
+            child: Container(
+              width: MediaQuery.of(context).size.width * 0.22,
+              height: 81.0,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: _member != null &&
+                          _member.memberProfile != null &&
+                          _member.memberProfile.mediaCollections != null &&
+                          _member.memberProfile.mediaCollections.length > 0
+                      ? CachedNetworkImageProvider(
+                          _member.memberProfile.mediaCollections[0].fullPathS3)
+                      : AssetImage(
+                          'assets/images/nophoto-sq.jpg',
+                        ),
+                ),
               ),
             ),
           ),

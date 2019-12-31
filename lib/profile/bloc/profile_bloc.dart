@@ -76,6 +76,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     bool viewYn,
     Profile profile,
   ) async* {
+    state.updateLoading(isLoaaing: true);
     try {
       String body = json.encode(profile);
       final response =

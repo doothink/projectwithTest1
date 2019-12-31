@@ -80,7 +80,7 @@ class _HomeApplyNowCardState extends State<HomeApplyNowCard> {
                           Padding(
                             padding: const EdgeInsets.only(left: 2.0),
                             child: Text(
-                              "55",
+                              _jobInfo.heartCount.toString(),
                               style: TextStyle(
                                   color: Colors.white, fontSize: 10),
                             ),
@@ -139,7 +139,7 @@ class _HomeApplyNowCardState extends State<HomeApplyNowCard> {
                                 fontWeight: FontWeight.w400,
                                 fontFamily: "NotoSansCJKkr-Bold",
                                 fontStyle: FontStyle.normal,
-                                fontSize: 14.0,
+                                fontSize: 12.0,
                               ),
                             ),
                             Text(

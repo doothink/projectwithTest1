@@ -64,25 +64,27 @@ class SearchDefault extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Container(
-            padding: EdgeInsets.only(bottom: 13),
-            alignment: Alignment.centerLeft,
-            child: Text(
-              "관심 분야를 탐색해 보세요",
-              style: const TextStyle(
-                color: Color.fromRGBO(79, 79, 79, 1),
-                fontWeight: FontWeight.w400,
-                fontFamily: "NotoSansCJKkr-Medium",
-                fontStyle: FontStyle.normal,
-                fontSize: 15.0,
-              ),
-            )),
-        Expanded(
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            child: GridView.count(
+    return SingleChildScrollView(
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          children: <Widget>[
+            Container(
+                padding: EdgeInsets.only(bottom: 13),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "관심 분야를 탐색해 보세요",
+                  style: const TextStyle(
+                    color: Color.fromRGBO(79, 79, 79, 1),
+                    fontWeight: FontWeight.w400,
+                    fontFamily: "NotoSansCJKkr-Medium",
+                    fontStyle: FontStyle.normal,
+                    fontSize: 15.0,
+                  ),
+                )),
+            GridView.count(
+              shrinkWrap: true,
+              primary: false,
               mainAxisSpacing: 15,
               crossAxisSpacing: 15,
               crossAxisCount: 2,
@@ -122,9 +124,9 @@ class SearchDefault extends StatelessWidget {
                 );
               }),
             ),
-          ),
-        )
-      ],
+          ],
+        ),
+      ),
     );
   }
 }

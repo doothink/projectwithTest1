@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
@@ -37,6 +38,12 @@ class JobInfoBloc extends Bloc<JobInfoEvent, JobInfoState> {
   Stream<JobInfoState> mapEventToState(JobInfoEvent event) async* {
     if (event is JobInfoLoad) {
       yield* _mapJobInfoLoadToState(event.jobInfoId);
+    } else if (event is JobInfoSave) {
+      yield* _mapJobInfoSaveToState(event.jobInfoId);
+    } else if (event is JobInfoHeartSave) {
+      yield* _mapJobInfoHeartSaveToState(event.jobInfoId);
+    } else if (event is JobInfoHeartDelete) {
+      yield* _mapJobInfoHeartDeleteToState(event.jobInfoId);
     }
   }
 
@@ -44,10 +51,57 @@ class JobInfoBloc extends Bloc<JobInfoEvent, JobInfoState> {
     yield JobInfoState.loading();
     try {
       final response = await _authenticationBloc.get('/api/jobinfo/$jobInfoId');
-//      print("]-----] _mapJobInfoLoadToState::response [-----[ ${response}");
       if (response != null) {
         final jobInfo = JobInfo.fromJson(response);
         yield JobInfoState.success(jobInfo);
+      }
+    } catch (e) {
+      print("]-----] error [-----[ ${e}");
+      yield JobInfoState.failure();
+    }
+  }
+
+  Stream<JobInfoState> _mapJobInfoSaveToState(int jobInfoId) async* {
+    yield state.updateLoading(isLoading: true);
+    try {
+      String body = json.encode({
+        "jobInfoId": jobInfoId,
+      });
+      final response =
+          await _authenticationBloc.post('/api/jobinfoapply', body);
+      if (response != null) {
+        yield state.updateSave();
+      }
+    } catch (e) {
+      print("]-----] error [-----[ ${e}");
+      yield JobInfoState.failure();
+    }
+  }
+
+  Stream<JobInfoState> _mapJobInfoHeartSaveToState(int jobInfoId) async* {
+    try {
+      String body = json.encode({
+        "jobInfoId": jobInfoId,
+      });
+      final response =
+          await _authenticationBloc.post('/api/jobinfoheart', body);
+      if (response != null) {
+//        print("]-----] response [-----[ ${response}");
+        yield state.updateHeart(isHeart: true, heartCount: response);
+      }
+    } catch (e) {
+      print("]-----] error [-----[ ${e}");
+      yield JobInfoState.failure();
+    }
+  }
+
+  Stream<JobInfoState> _mapJobInfoHeartDeleteToState(int jobInfoId) async* {
+    try {
+      final response =
+          await _authenticationBloc.delete('/api/jobinfoheart/$jobInfoId');
+      if (response != null) {
+//        print("]-----] response [-----[ ${response}");
+        yield state.updateHeartDelete(isHeart: false, heartCount: response);
       }
     } catch (e) {
       print("]-----] error [-----[ ${e}");

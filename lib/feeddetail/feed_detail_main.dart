@@ -3,10 +3,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:with_flutter/common/date_util.dart';
+import 'package:with_flutter/common/empty.dart';
 import 'package:with_flutter/feeddetail/bloc/bloc.dart';
 import 'package:with_flutter/feeddetail/feed_detail_top_banner.dart';
 import 'package:with_flutter/model/feed.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+
+import 'feed_recommand.dart';
 
 class FeedDetailMain extends StatefulWidget {
   final int _feedId;
@@ -57,102 +60,115 @@ class _FeedDetailMainState extends State<FeedDetailMain> {
       },
       child: BlocBuilder<FeedDetailBloc, FeedDetailState>(
         builder: (context, state) {
-          return _feed != null
-              ? Container(
-                  width: MediaQuery.of(context).size.width,
-//                  padding: EdgeInsets.only(left: 10, right: 10),
-                  child: Column(
-                    children: <Widget>[
-                      _mediaType == "YOUTUBE"
-                          ? _feed.mediaCollections != null &&
-                                  _feed.mediaCollections[0] != null &&
-                                  _feed.mediaCollections[0].fullPath != null
-                              ? YoutubePlayer(
-                                  controller: YoutubePlayerController(
-                                    initialVideoId:
-                                        YoutubePlayer.convertUrlToId(
-                                            _feed.mediaCollections[0].fullPath),
-                                    flags: YoutubePlayerFlags(
-                                      autoPlay: false,
-                                      mute: false,
+          return SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                _feed != null
+                    ? Container(
+                        width: MediaQuery.of(context).size.width,
+                        color: Colors.white,
+                        padding: EdgeInsets.only(bottom: 20),
+                        child: Column(
+                          children: <Widget>[
+                            _mediaType == "YOUTUBE"
+                                ? _feed.mediaCollections != null &&
+                                        _feed.mediaCollections[0] != null &&
+                                        _feed.mediaCollections[0].fullPath !=
+                                            null
+                                    ? YoutubePlayer(
+                                        controller: YoutubePlayerController(
+                                          initialVideoId:
+                                              YoutubePlayer.convertUrlToId(_feed
+                                                  .mediaCollections[0]
+                                                  .fullPath),
+                                          flags: YoutubePlayerFlags(
+                                            autoPlay: false,
+                                            mute: false,
+                                          ),
+                                        ),
+                                        showVideoProgressIndicator: true,
+                                      )
+                                    : Text(
+                                        "",
+                                        style: TextStyle(height: 0),
+                                      )
+                                : FeedDetailTopBanner(
+                                    mediaCollections: _feed.mediaCollections,
+                                  ),
+                            Container(
+                              padding:
+                                  EdgeInsets.only(left: 15, right: 15, top: 12),
+                              alignment: Alignment.centerLeft,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    "${_feed.member.firstName}",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400,
+                                      fontFamily: "NotoSansCJKkr-Bold",
+                                      fontStyle: FontStyle.normal,
+                                      fontSize: 15.0,
                                     ),
                                   ),
-                                  showVideoProgressIndicator: true,
-                                )
-                              : Text(
-                                  "",
-                                  style: TextStyle(height: 0),
-                                )
-                          : FeedDetailTopBanner(
-                              mediaCollections: _feed.mediaCollections,
-                            ),
-                      Container(
-                        padding: EdgeInsets.only(left: 15, right: 15, top: 12),
-                        alignment: Alignment.centerLeft,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              "${_feed.member.firstName}",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w400,
-                                fontFamily: "NotoSansCJKkr-Bold",
-                                fontStyle: FontStyle.normal,
-                                fontSize: 15.0,
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 2.0),
+                                    child: Text(
+                                      DateUtils.getCreatedTime(_feed.createdAt),
+                                      style: const TextStyle(
+                                        color: Color.fromRGBO(152, 152, 152, 1),
+                                        fontWeight: FontWeight.w400,
+                                        fontFamily: "NotoSansCJKkr-Bold",
+                                        fontStyle: FontStyle.normal,
+                                        fontSize: 12.0,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 2.0),
-                              child: Text(
-                                DateUtils.getCreatedTime(_feed.createdAt),
-                                style: const TextStyle(
-                                  color: Color.fromRGBO(152, 152, 152, 1),
-                                  fontWeight: FontWeight.w400,
-                                  fontFamily: "NotoSansCJKkr-Bold",
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 12.0,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(left: 15, right: 15, top: 12),
-                        alignment: Alignment.centerLeft,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              "${_feed.title}",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w400,
-                                fontFamily: "NotoSansCJKkr-Medium",
-                                fontStyle: FontStyle.normal,
-                                fontSize: 15.0,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 6.0),
-                              child: Text(
-                                _feed.contents,
-                                style: const TextStyle(
-                                  color: Color.fromRGBO(152, 152, 152, 1),
-                                  fontWeight: FontWeight.w400,
-                                  fontFamily: "NotoSansCJKkr-Regular",
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 11.0,
-                                ),
+                            Container(
+                              padding:
+                                  EdgeInsets.only(left: 15, right: 15, top: 12),
+                              alignment: Alignment.centerLeft,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    "${_feed.title}",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400,
+                                      fontFamily: "NotoSansCJKkr-Medium",
+                                      fontStyle: FontStyle.normal,
+                                      fontSize: 15.0,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 6.0),
+                                    child: Text(
+                                      _feed.contents,
+                                      style: const TextStyle(
+                                        color: Color.fromRGBO(152, 152, 152, 1),
+                                        fontWeight: FontWeight.w400,
+                                        fontFamily: "NotoSansCJKkr-Regular",
+                                        fontStyle: FontStyle.normal,
+                                        fontSize: 11.0,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
                         ),
-                      ),
-                    ],
-                  ))
-              : Text("");
+                      )
+                    : EmptyWidget(),
+                FeedRecommand()
+              ],
+            ),
+          );
         },
       ),
     );

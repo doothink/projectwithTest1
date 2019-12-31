@@ -91,7 +91,7 @@ class SearchResultJobInfoCard extends StatelessWidget {
                             fontWeight: FontWeight.w400,
                             fontFamily: "NotoSansCJKkr-Bold",
                             fontStyle: FontStyle.normal,
-                            fontSize: 14.0,
+                            fontSize: 12.0,
                           ),
                         ),
                         Text(
