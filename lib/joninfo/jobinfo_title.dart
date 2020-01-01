@@ -25,7 +25,7 @@ class _JobInfoTitleState extends State<JobInfoTitle> {
   JobInfoBloc _jobInfoBloc;
 
   JobInfo get _jobInfo => widget._jobInfo;
-  bool _isHeart;
+  bool _isHeart = false;
   int _heartCount;
 
   @override
@@ -42,7 +42,10 @@ class _JobInfoTitleState extends State<JobInfoTitle> {
       listener: (context, state) {
         if (state.isHeartSuccess || state.isHeartDeleteSuccess) {
           setState(() {
-            _isHeart = state.isHeart;
+            if (state.isHeart != null) {
+              _isHeart = state.isHeart;
+            }
+
             _heartCount = state.heartCount;
           });
         }
@@ -105,7 +108,7 @@ class _JobInfoTitleState extends State<JobInfoTitle> {
                     width: MediaQuery.of(context).size.width * 0.20,
                     child: GestureDetector(
                       onTap: () {
-                        if (_isHeart) {
+                        if (_isHeart == true) {
                           _jobInfoBloc
                               .add(JobInfoHeartDelete(jobInfoId: _jobInfo.id));
                         } else {
@@ -113,7 +116,7 @@ class _JobInfoTitleState extends State<JobInfoTitle> {
                               .add(JobInfoHeartSave(jobInfoId: _jobInfo.id));
                         }
                       },
-                      child: _isHeart
+                      child: _isHeart != null && _isHeart == true
                           ? Container(
                               width: 65,
                               padding: EdgeInsets.only(

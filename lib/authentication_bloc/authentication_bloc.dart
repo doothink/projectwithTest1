@@ -13,9 +13,9 @@ class AuthenticationBloc
   final UserRepository _userRepository;
   final http.Client _httpClient;
 
-  final String apiUrl = API_URL_LOCAL;
+//  final String apiUrl = API_URL_LOCAL;
 
-//  final String apiUrl = API_URL_DEV;
+  final String apiUrl = API_URL_DEV;
 //  final String apiUrl = API_URL_PROD;
 
   AuthenticationBloc({
@@ -143,7 +143,7 @@ class AuthenticationBloc
             "Authorization": accessToken
           },
           body: body);
-//      print(response.body);
+      print(response.body);
       if (response.statusCode == 200) {
         return json.decode(utf8.decode(response.bodyBytes));
       } else if (response.statusCode == 401) {
@@ -205,8 +205,8 @@ class AuthenticationBloc
   }
 
   Future<dynamic> basicAuth(String url, String basicToken) async {
-    print(']-------] basicAuth basicToken [-------[ ${basicToken}');
-    print(']-------] basicAuth apiUrl [-------[ ${apiUrl}');
+//    print(']-------] basicAuth basicToken [-------[ ${basicToken}');
+//    print(']-------] basicAuth apiUrl [-------[ ${apiUrl}');
     final response = await _httpClient.get(apiUrl + url, headers: {
       "Authorization": basicToken,
       "Access-Control-Expose-Headers": "Authorization"

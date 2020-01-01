@@ -532,6 +532,7 @@ class _ProfilePostState extends State<ProfilePost> {
                                   ),
                                 ),
                                 TextFormField(
+//                                  autofocus: true,
                                   controller: _countryController,
                                   decoration: InputDecoration(
                                     contentPadding:
@@ -1381,15 +1382,17 @@ class _ProfilePostState extends State<ProfilePost> {
                               return InputDecorator(
                                 textAlign: TextAlign.center,
                                 decoration: InputDecoration(
-                                  enabledBorder: UnderlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Colors.white)),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                  ),
-                                  errorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                  ),
+                                  contentPadding:
+                                      const EdgeInsets.only(bottom: -10),
+//                                  enabledBorder: UnderlineInputBorder(
+//                                      borderSide:
+//                                          BorderSide(color: Colors.white)),
+//                                  focusedBorder: UnderlineInputBorder(
+//                                    borderSide: BorderSide(color: Colors.white),
+//                                  ),
+//                                  errorBorder: UnderlineInputBorder(
+//                                    borderSide: BorderSide(color: Colors.white),
+//                                  ),
                                   errorText:
                                       state.hasError ? state.errorText : null,
                                 ),

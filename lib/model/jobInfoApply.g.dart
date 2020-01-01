@@ -17,6 +17,7 @@ JobInfoApply _$JobInfoApplyFromJson(Map<String, dynamic> json) {
     jobInfo: json['jobInfo'] == null
         ? null
         : JobInfo.fromJson(json['jobInfo'] as Map<String, dynamic>),
+    status: json['status'] as String,
   );
 }
 
@@ -27,4 +28,5 @@ Map<String, dynamic> _$JobInfoApplyToJson(JobInfoApply instance) =>
       'jobInfoId': instance.jobInfoId,
       'member': instance.member?.toJson(),
       'jobInfo': instance.jobInfo?.toJson(),
+      'status': instance.status,
     };

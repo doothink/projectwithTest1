@@ -11,8 +11,10 @@ class JobInfoApply extends Equatable {
 
   final int memberId;
   final int jobInfoId;
+
   final Member member;
   final JobInfo jobInfo;
+  final String status;
 
   const JobInfoApply({
     this.id,
@@ -20,6 +22,7 @@ class JobInfoApply extends Equatable {
     this.jobInfoId,
     this.member,
     this.jobInfo,
+    this.status,
   });
 
   factory JobInfoApply.fromJson(Map<String, dynamic> json) =>

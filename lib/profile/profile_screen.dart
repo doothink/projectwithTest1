@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:with_flutter/authentication_bloc/bloc.dart';
 import 'package:with_flutter/common/empty.dart';
+import 'package:with_flutter/jobinfoapply/jobinfo_apply.dart';
 
 import 'bloc/bloc.dart';
 import 'profile.dart';
@@ -71,93 +72,206 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: ProfilePost(),
           )),
       endDrawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              child: Text('WITH'),
-              decoration: BoxDecoration(
-                color: Colors.white,
-              ),
+        child: SafeArea(
+          child: Container(
+            color: Color.fromRGBO(248, 248, 248, 1),
+            child: Column(
+              children: <Widget>[
+                ListTile(
+                  title: Text(
+                    '더보기',
+                    style: const TextStyle(
+                        color: const Color(0xff4a4a4a),
+                        fontWeight: FontWeight.w500,
+                        fontFamily: "NotoSansCJKkr-Medium",
+                        fontStyle: FontStyle.normal,
+                        fontSize: 16.0),
+                  ),
+                ),
+                Divider(
+                  indent: 14,
+                  endIndent: 14,
+                  color: Color.fromRGBO(112, 112, 112, 1),
+                ),
+                ListTile(
+                  contentPadding: EdgeInsets.only(left: 28),
+                  dense: true,
+                  title: Row(
+                    children: <Widget>[
+                      Image(
+                        image: AssetImage('assets/images/icons/785@3x.png'),
+                        width: 22.3,
+                        height: 22,
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 25),
+                        child: Text(
+                          '공지사항',
+                          style: const TextStyle(
+                              color: const Color(0xff4a4a4a),
+                              fontWeight: FontWeight.w500,
+                              fontFamily: "NotoSansCJKkr-Medium",
+                              fontStyle: FontStyle.normal,
+                              fontSize: 16.0),
+                        ),
+                      ),
+                    ],
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                Divider(
+                  indent: 60,
+                  endIndent: 20,
+                  color: Color.fromRGBO(112, 112, 112, 1),
+                ),
+                ListTile(
+                  contentPadding: EdgeInsets.only(left: 28),
+                  dense: true,
+                  title: Row(
+                    children: <Widget>[
+                      Image(
+                        image: AssetImage('assets/images/icons/779@3x.png'),
+                        width: 22.3,
+                        height: 22,
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 25),
+                        child: Text(
+                          '좋아요 한 공고 보기',
+                          style: const TextStyle(
+                              color: const Color(0xff4a4a4a),
+                              fontWeight: FontWeight.w500,
+                              fontFamily: "NotoSansCJKkr-Medium",
+                              fontStyle: FontStyle.normal,
+                              fontSize: 16.0),
+                        ),
+                      ),
+                    ],
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+//                    Navigator.push(
+//                      context,
+//                      MaterialPageRoute(
+//                          builder: (context) => JobInfoApplyScreen()),
+//                    );
+                  },
+                ),
+                Divider(
+                  indent: 60,
+                  endIndent: 20,
+                  color: Color.fromRGBO(112, 112, 112, 1),
+                ),
+                ListTile(
+                  contentPadding: EdgeInsets.only(left: 28),
+                  dense: true,
+                  title: Row(
+                    children: <Widget>[
+                      Image(
+                        image: AssetImage('assets/images/icons/781@3x.png'),
+                        width: 22.3,
+                        height: 22,
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 25),
+                        child: Text(
+                          '내 지원 현황 보기',
+                          style: const TextStyle(
+                              color: const Color(0xff4a4a4a),
+                              fontWeight: FontWeight.w500,
+                              fontFamily: "NotoSansCJKkr-Medium",
+                              fontStyle: FontStyle.normal,
+                              fontSize: 16.0),
+                        ),
+                      ),
+                    ],
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => JobInfoApplyScreen()),
+                    );
+                  },
+                ),
+                Divider(
+                  indent: 60,
+                  endIndent: 20,
+                  color: Color.fromRGBO(112, 112, 112, 1),
+                ),
+                ListTile(
+                  title: Text('로그아웃'),
+                  onTap: () {
+                    BlocProvider.of<AuthenticationBloc>(context).add(
+                      LoggedOut(),
+                    );
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
             ),
-            ListTile(
-              title: Text('LogOut'),
-              onTap: () {
-                BlocProvider.of<AuthenticationBloc>(context).add(
-                  LoggedOut(),
-                );
-                Navigator.pop(context);
-              },
-            ),
-
-          ],
+          ),
         ),
       ),
       bottomSheet: isScrollingDown
           ? Container(
-        width: MediaQuery
-            .of(context)
-            .size
-            .width,
+              width: MediaQuery.of(context).size.width,
 //              height: 53,
-        decoration: BoxDecoration(
-          color: Colors.transparent,
-        ),
-        child: Row(
-          children: <Widget>[
-            SizedBox(
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width * 0.3,
-              child: FlatButton(
-                padding: EdgeInsets.only(top: 15, bottom: 15),
-                shape: RoundedRectangleBorder(),
-                color: Color.fromRGBO(195, 195, 195, 1),
-                onPressed: () {
-                  _profileBloc
-                      .add(ProfileSaveButtonPressed(viewYn: false));
-                },
-                child: Text(
-                  "임시저장",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w400,
-                    fontFamily: "NotoSansCJKkr-Medium",
-                    fontStyle: FontStyle.normal,
-                    fontSize: 15.0,
-                  ),
-                ),
+              decoration: BoxDecoration(
+                color: Colors.transparent,
               ),
-            ),
-            SizedBox(
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width * 0.7,
-              child: FlatButton(
-                padding: EdgeInsets.only(top: 15, bottom: 15),
-                shape: RoundedRectangleBorder(),
-                color: Color.fromRGBO(48, 190, 157, 1),
-                onPressed: () {
-                  _profileBloc
-                      .add(ProfileSaveButtonPressed(viewYn: true));
-                },
-                child: Text(
-                  "입력완료",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w400,
-                    fontFamily: "NotoSansCJKkr-Medium",
-                    fontStyle: FontStyle.normal,
-                    fontSize: 15.0,
+              child: Row(
+                children: <Widget>[
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.3,
+                    child: FlatButton(
+                      padding: EdgeInsets.only(top: 15, bottom: 15),
+                      shape: RoundedRectangleBorder(),
+                      color: Color.fromRGBO(195, 195, 195, 1),
+                      onPressed: () {
+                        _profileBloc
+                            .add(ProfileSaveButtonPressed(viewYn: false));
+                      },
+                      child: Text(
+                        "임시저장",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: "NotoSansCJKkr-Medium",
+                          fontStyle: FontStyle.normal,
+                          fontSize: 15.0,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.7,
+                    child: FlatButton(
+                      padding: EdgeInsets.only(top: 15, bottom: 15),
+                      shape: RoundedRectangleBorder(),
+                      color: Color.fromRGBO(48, 190, 157, 1),
+                      onPressed: () {
+                        _profileBloc
+                            .add(ProfileSaveButtonPressed(viewYn: true));
+                      },
+                      child: Text(
+                        "입력완료",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: "NotoSansCJKkr-Medium",
+                          fontStyle: FontStyle.normal,
+                          fontSize: 15.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ],
-        ),
-      )
+            )
           : EmptyWidget(),
     );
   }
