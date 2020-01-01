@@ -93,6 +93,15 @@ class JobInfoApplyCard extends StatelessWidget {
                               fontSize: 18.0),
                         ),
                       ),
+                      Text(
+                        '지원일 : ${DateUtils.getApplyTime(_jobInfoApply.createdAt)}',
+                        style: const TextStyle(
+                            color: const Color(0xffa8a8a8),
+                            fontWeight: FontWeight.w500,
+                            fontFamily: "NotoSansCJKkr-Regular",
+                            fontStyle: FontStyle.normal,
+                            fontSize: 11.0),
+                      ),
                     ],
                   ),
                 ),
@@ -102,7 +111,6 @@ class JobInfoApplyCard extends StatelessWidget {
           _jobInfoApply.status != null
               ? Container(
                   padding: EdgeInsets.only(right: 14),
-
                   child: Row(
                     crossAxisAlignment: _jobInfoApply.status == 'PASSED' ||
                             _jobInfoApply.status == 'PASSED'

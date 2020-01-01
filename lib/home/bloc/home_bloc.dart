@@ -35,7 +35,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   @override
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
-    print("]-----] MembersTopLoad event [-----[ ${event}");
+//    print("]-----] MembersTopLoad event [-----[ ${event}");
     if (event is JobInfosLoad) {
       yield* _mapJobInfosLoadToState(event.size);
     } else if (event is JobInfosEmpty) {
@@ -51,7 +51,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       final List<JobInfo> jobInfos = contents.map((data) {
         return JobInfo.fromJson(data);
       }).toList();
-      print("]-----] _mapJobInfosLoadToState.jobInfos [-----[ ${jobInfos}");
+//      print("]-----] _mapJobInfosLoadToState.jobInfos [-----[ ${jobInfos}");
       yield state.jobInfosLoaedSuccess(jobInfos: jobInfos);
     } catch (error) {
       print("]-----] _mapJobInfosLoadToState.error [-----[ ${error}");

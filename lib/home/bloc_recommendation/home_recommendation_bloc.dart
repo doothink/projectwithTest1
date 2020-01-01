@@ -38,9 +38,9 @@ class HomeRecommendationBloc
   @override
   Stream<HomeRecommendationState> mapEventToState(
       HomeRecommendationEvent event) async* {
-    print("]-----] MembersTopLoad event [-----[ ${event}");
+//    print("]-----] MembersTopLoad event [-----[ ${event}");
     if (event is MembersTopLoad) {
-      print("]-----] MembersTopLoad call [-----[");
+//      print("]-----] MembersTopLoad call [-----[");
       yield* _mapMembersTopLoadToState(event.size);
     }
   }
@@ -54,7 +54,7 @@ class HomeRecommendationBloc
       final List<Member> members = contents.map((data) {
         return Member.fromJson(data);
       }).toList();
-      print("]-----] _mapMembersTopLoadToState.members [-----[ ${members.length}");
+//      print("]-----] _mapMembersTopLoadToState.members [-----[ ${members.length}");
       yield HomeRecommendationState.loaedSuccess(members);
     } catch (error) {
       print("]-----] _mapMembersTopLoadToState.error [-----[ ${error}");

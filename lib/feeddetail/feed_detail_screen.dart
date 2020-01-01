@@ -36,6 +36,7 @@ class _FeedDetailScreenState extends State<FeedDetailScreen> {
     return Scaffold(
       backgroundColor: Color.fromRGBO(248, 248, 248, 1),
       appBar: AppBar(
+        centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios, color: Colors.black),
           onPressed: () => Navigator.pop(context),
