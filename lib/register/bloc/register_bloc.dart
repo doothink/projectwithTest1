@@ -84,9 +84,9 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         confirmPassword,
       );
       yield RegisterState.success();
-    } catch (e) {
-      print("]-----] _mapFormSubmittedToState::error [-----[ $e");
-      yield RegisterState.failure();
+    } catch (error) {
+      print("]-----] _mapFormSubmittedToState::error [-----[ $error");
+      yield RegisterState.failure(error.message);
     }
   }
 

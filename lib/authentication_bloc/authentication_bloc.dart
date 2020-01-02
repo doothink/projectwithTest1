@@ -236,7 +236,8 @@ class AuthenticationBloc
     if (response.statusCode == 200) {
       return true;
     } else {
-      throw Exception('Error postWithoutAuth');
+      var result = json.decode(response.body);
+      throw Exception(ErrorMessage.getValue(result['code']));
     }
   }
 

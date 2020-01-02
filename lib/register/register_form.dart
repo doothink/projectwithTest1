@@ -67,20 +67,23 @@ class _RegisterFormState extends State<RegisterForm> {
           Navigator.of(context).pop();
         }
         if (state.isFailure) {
-//          Scaffold.of(context)
-//            ..hideCurrentSnackBar()
-//            ..showSnackBar(
-//              SnackBar(
-//                content: Row(
-//                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                  children: [
-//                    Text('Registration Failure'),
-//                    Icon(Icons.error),
-//                  ],
-//                ),
-//                backgroundColor: Colors.red,
-//              ),
-//            );
+          Scaffold.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(
+                content: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      state.failureMessage,
+                      style: TextStyle(fontSize: 11),
+                    ),
+                    Icon(Icons.error),
+                  ],
+                ),
+                backgroundColor: Colors.red,
+              ),
+            );
         }
       },
       child: BlocBuilder<RegisterBloc, RegisterState>(

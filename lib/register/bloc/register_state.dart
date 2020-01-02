@@ -7,6 +7,7 @@ class RegisterState {
   final bool isSubmitting;
   final bool isSuccess;
   final bool isFailure;
+  final String failureMessage;
 
   bool get isFormValid => isEmailValid && isPasswordValid;
 
@@ -16,6 +17,7 @@ class RegisterState {
     @required this.isSubmitting,
     @required this.isSuccess,
     @required this.isFailure,
+    this.failureMessage,
   });
 
   factory RegisterState.empty() {
@@ -38,13 +40,14 @@ class RegisterState {
     );
   }
 
-  factory RegisterState.failure() {
+  factory RegisterState.failure(String failureMessage) {
     return RegisterState(
       isEmailValid: true,
       isPasswordValid: true,
       isSubmitting: false,
       isSuccess: false,
       isFailure: true,
+      failureMessage: failureMessage,
     );
   }
 

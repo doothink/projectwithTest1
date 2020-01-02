@@ -78,7 +78,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     try {
       final basicToken =
           'Basic ' + base64.encode(utf8.encode('$email:$password'));
-      print(basicToken);
+//      print(basicToken);
       final token = await _signinGet(basicToken);
 
       yield LoginState.success();
@@ -88,7 +88,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   Future<String> _signinGet(String basicToken) async {
-    print(basicToken);
+//    print(basicToken);
     final accessToken =
         await _authenticationBloc.basicAuth("/auth/signin", basicToken);
 
