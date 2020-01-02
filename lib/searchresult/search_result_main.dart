@@ -45,44 +45,38 @@ class _SearchResultMainState extends State<SearchResultMain> {
       },
       child: BlocBuilder<SearchResultBloc, SearchResultState>(
         builder: (context, state) {
-          return SingleChildScrollView(
-            child: Container(
+          return Container(
 //            padding: EdgeInsets.only(top: 13, left: 15, right: 15),
-              child: Column(
-                children: <Widget>[
-                  state.jobInfos != null && state.jobInfos.length > 0
-                      ? Container(
-                        width: MediaQuery.of(context).size.width,
-                        alignment: Alignment.centerLeft,
-                        child: GridView.count(
-                          shrinkWrap: true,
-                          mainAxisSpacing: 4,
-                          crossAxisSpacing: 4,
-                          crossAxisCount: 2,
+            child: state.jobInfos != null && state.jobInfos.length > 0
+                ? Container(
+                  width: MediaQuery.of(context).size.width,
+                  alignment: Alignment.centerLeft,
+                  child: GridView.count(
+                    shrinkWrap: true,
+                    mainAxisSpacing: 4,
+                    crossAxisSpacing: 4,
+                    crossAxisCount: 2,
 //                        childAspectRatio: 0.95,
-                          children:
-                              List.generate(state.jobInfos.length, (index) {
-                            return SearchResultJobInfoCard(
-                              jobInfo: state.jobInfos[index],
-                            );
-                          }),
-                        ),
-                      )
-                      : Container(
-                          child: Center(
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 28.0),
-                            child: Image(
-                              image: AssetImage(
-                                  'assets/images/search-nodata@3x.png'),
-                              width: 181,
-                              height: 156,
-                            ),
-                          ),
-                        )),
-                ],
-              ),
-            ),
+                    children:
+                        List.generate(state.jobInfos.length, (index) {
+                      return SearchResultJobInfoCard(
+                        jobInfo: state.jobInfos[index],
+                      );
+                    }),
+                  ),
+                )
+                : Container(
+                    child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 28.0),
+                      child: Image(
+                        image: AssetImage(
+                            'assets/images/search-nodata@3x.png'),
+                        width: 181,
+                        height: 156,
+                      ),
+                    ),
+                  )),
           );
         },
       ),

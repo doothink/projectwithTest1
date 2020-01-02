@@ -6,7 +6,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:with_flutter/common/empty.dart';
 import 'package:with_flutter/common/string_util.dart';
+import 'package:with_flutter/model/injuaryHistory.dart';
+import 'package:with_flutter/model/playerHistory.dart';
 import 'package:with_flutter/model/profile.dart';
+import 'package:with_flutter/model/schoolHistory.dart';
+import 'package:with_flutter/profile/profile_injuaryhistory_input.dart';
+import 'package:with_flutter/profile/profile_school_input.dart';
+import 'package:with_flutter/profile_view/profile_injuaryhistory_view.dart';
+import 'package:with_flutter/profile_view/profile_school_view.dart';
 
 import 'bloc/bloc.dart';
 
@@ -92,6 +99,50 @@ class _ProfileViewMainState extends State<ProfileViewMain> {
   int _agentNegoation;
   int _agentAftercare;
 
+  List<PlayerHistory> _playerHistoryList = [];
+
+  List<School> _schoolList = [];
+
+  School _makeProfileSchoolInput(SchoolHistory schoolHistory) {
+    TextEditingController _dateController = TextEditingController();
+    TextEditingController _nameController = TextEditingController();
+    TextEditingController _positionController = TextEditingController();
+
+    return new School(
+      schoolHistory.id,
+      ProfileSchoolView(
+        key: GlobalKey<FormFieldState>(),
+        index: schoolHistory.id,
+        dateController: _dateController,
+        nameController: _nameController,
+        positionController: _positionController,
+        schoolHistory: schoolHistory,
+      ),
+      _dateController,
+      _nameController,
+      _positionController,
+    );
+  }
+
+  List<Injuary> _injuaryHistoryList = [];
+  Injuary _makeInjuaryHistoryInput(InjuaryHistory injuaryHistory) {
+    TextEditingController _yaerController = TextEditingController();
+    TextEditingController _contentController = TextEditingController();
+
+    return new Injuary(
+      injuaryHistory.id,
+      InjuaryHistoryView(
+        key: GlobalKey<FormFieldState>(),
+        index: injuaryHistory.id,
+        yearController: _yaerController,
+        contentController: _contentController,
+        injuaryHistory: injuaryHistory,
+      ),
+      _yaerController,
+      _contentController,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<ProfileViewBloc, ProfileViewState>(
@@ -106,14 +157,93 @@ class _ProfileViewMainState extends State<ProfileViewMain> {
                 _imageNetwork = state.profile.mediaCollections[0].fullPathS3;
               }
             }
-            _nickNameController.text = StringUtils.defaultNull(state.profile.nickName);
-            _realNameController.text = StringUtils.defaultNull(state.profile.realName);
+            _nickNameController.text =
+                StringUtils.defaultNull(state.profile.nickName);
+            _realNameController.text =
+                StringUtils.defaultNull(state.profile.realName);
             _countryController.text = state.profile.country;
+            if (state.profile.gender != null) {
+              _gender = _findGenger(state.profile.gender);
+            }
+            _birthdayController.text = state.profile.birthday;
+            _emailController.text = state.profile.email;
+            _phoneNumberController.text = state.profile.mobilePhoneNumber;
+            _favoriteBrandController.text = state.profile.favoriteBrand;
+            _favoriteSportController.text = state.profile.favoriteSport;
+
+            _favoriteClubController.text = state.profile.favoriteClub;
+            _favoritePlayerController.text = state.profile.favoritePlayer;
+
+            _playerInfoPhysical = state.profile.playerInfoPhysical;
+            _playerInfoSkill = state.profile.playerInfoSkill;
+            _playerInfoCreative = state.profile.playerInfoCreative;
+            _playerInfoStrategy = state.profile.playerInfoStrategy;
+            _playerInfoTeamWork = state.profile.playerInfoTeamWork;
+
+            _playerInfoLevelController.text = state.profile.playerInfoLevel;
+            _clubNameController.text = state.profile.clubName;
+            _countryOfLeagueController.text = state.profile.countryOfLeague;
+            _leagueNameController.text = state.profile.leagueName;
+            _playerHeightController.text = state.profile.playerHeight != null
+                ? state.profile.playerHeight.toString()
+                : "";
+            _playerWeightController.text = state.profile.playerWeight != null
+                ? state.profile.playerWeight.toString()
+                : "";
+
+            _backNumberController.text = state.profile.backNumber;
+            _mainKickController.text = state.profile.mainKick;
+            _positionController.text = state.profile.position;
+            _positionRoleController.text = state.profile.positionRole;
+
+            if (state.profile.armyDiv != null) {
+              _armyDiv = _findArmyDiv(state.profile.armyDiv);
+            }
+
+            _armyReasonController.text = state.profile.armyReason;
+            _beforeClubController.text = state.profile.beforeClub;
+            _afterClubController.text = state.profile.afterClub;
+            _movedAtController.text = state.profile.movedAt;
+            _contractEndAtController.text = state.profile.contractEndAt;
+            _transferFeeController.text = state.profile.transferFee;
+            _salaryController.text = state.profile.salary;
+
+            if (state.profile.memberSchools != null) {
+              if (state.profile.memberSchools.length > 0) {
+                List<School> _schoolsTmp = [];
+                for (int i = 0; i < state.profile.memberSchools.length; i++) {
+                  _schoolsTmp.add(
+                      _makeProfileSchoolInput(state.profile.memberSchools[i]));
+                }
+
+                _schoolList = _schoolsTmp;
+              }
+            }
+
+            if (state.profile.injuaryHistories != null) {
+              if (state.profile.injuaryHistories.length > 0) {
+                List<Injuary> _injuaryTmp = [];
+                for (int i = 0;
+                    i < state.profile.injuaryHistories.length;
+                    i++) {
+                  _injuaryTmp.add(_makeInjuaryHistoryInput(
+                      state.profile.injuaryHistories[i]));
+                }
+
+                _injuaryHistoryList = _injuaryTmp;
+              }
+            }
+            if (state.profile.memberPlayerHistories != null) {
+              if (state.profile.memberPlayerHistories.length > 0) {
+                _playerHistoryList = state.profile.memberPlayerHistories;
+              }
+            }
           });
         }
       },
       child: BlocBuilder<ProfileViewBloc, ProfileViewState>(
         builder: (context, state) {
+
           return _profile != null
               ? Container(
                   child: SafeArea(
@@ -215,6 +345,7 @@ class _ProfileViewMainState extends State<ProfileViewMain> {
                                         ),
                                       ),
                                       TextFormField(
+                                        enabled: false,
                                         controller: _countryController,
                                         decoration: InputDecoration(
                                           contentPadding: const EdgeInsets.only(
@@ -247,9 +378,11 @@ class _ProfileViewMainState extends State<ProfileViewMain> {
                                         ),
                                       ),
                                       FormField<String>(
+                                        enabled: false,
                                         builder:
                                             (FormFieldState<String> state) {
                                           return InputDecorator(
+
                                             textAlign: TextAlign.center,
                                             decoration: InputDecoration(
                                               contentPadding:
@@ -271,8 +404,10 @@ class _ProfileViewMainState extends State<ProfileViewMain> {
                                                   : null,
                                             ),
                                             child: DropdownButtonHideUnderline(
+
                                               child:
                                                   DropdownButton<GenderSelect>(
+
                                                 value: null,
                                                 iconSize: 0,
                                                 isExpanded: true,
@@ -311,13 +446,7 @@ class _ProfileViewMainState extends State<ProfileViewMain> {
                                                     ),
                                                   ],
                                                 ),
-                                                onChanged:
-                                                    (GenderSelect select) {
-//                                            print(select.value);
-                                                  setState(() {
-                                                    _gender = select;
-                                                  });
-                                                },
+
                                                 items: _selectGender
                                                     .map((GenderSelect item) {
                                                   return DropdownMenuItem<
@@ -355,6 +484,7 @@ class _ProfileViewMainState extends State<ProfileViewMain> {
                                         ),
                                       ),
                                       TextFormField(
+                                        enabled: false,
 //                                        inputFormatters: [_birthdayFormatter],
                                         controller: _birthdayController,
                                         keyboardType: TextInputType.phone,
@@ -389,6 +519,7 @@ class _ProfileViewMainState extends State<ProfileViewMain> {
                                         ),
                                       ),
                                       TextFormField(
+                                        enabled: false,
                                         controller: _favoriteBrandController,
                                         decoration: InputDecoration(
                                           contentPadding: const EdgeInsets.only(
@@ -421,6 +552,7 @@ class _ProfileViewMainState extends State<ProfileViewMain> {
                                         ),
                                       ),
                                       TextFormField(
+                                        enabled: false,
                                         controller: _favoriteSportController,
                                         decoration: InputDecoration(
                                           contentPadding: const EdgeInsets.only(
@@ -453,6 +585,7 @@ class _ProfileViewMainState extends State<ProfileViewMain> {
                                         ),
                                       ),
                                       TextFormField(
+                                        enabled: false,
                                         controller: _favoriteClubController,
                                         decoration: InputDecoration(
                                           contentPadding: const EdgeInsets.only(
@@ -485,6 +618,7 @@ class _ProfileViewMainState extends State<ProfileViewMain> {
                                         ),
                                       ),
                                       TextFormField(
+                                        enabled: false,
                                         controller: _favoritePlayerController,
                                         decoration: InputDecoration(
                                           contentPadding: const EdgeInsets.only(
@@ -573,6 +707,43 @@ class _ProfileViewMainState extends State<ProfileViewMain> {
         break;
     }
   }
+}
+
+class School {
+  final int index;
+  final ProfileSchoolView profileSchoolView;
+  final TextEditingController dateController;
+  final TextEditingController nameController;
+  final TextEditingController positionController;
+
+  School(
+    this.index,
+    this.profileSchoolView,
+    this.dateController,
+    this.nameController,
+    this.positionController,
+  );
+
+  @override
+  String toString() =>
+      'School { index: $index , profileSchoolView: ${profileSchoolView}';
+}
+
+class Injuary {
+  final int index;
+  final InjuaryHistoryView injuaryHistoryView;
+  final TextEditingController yearController;
+  final TextEditingController contentController;
+
+  Injuary(
+    this.index,
+    this.injuaryHistoryView,
+    this.yearController,
+    this.contentController,
+  );
+
+  @override
+  String toString() => 'InjuaryHistory { index: $index }';
 }
 
 class ArmyDivSelect {

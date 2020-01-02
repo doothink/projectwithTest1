@@ -10,6 +10,7 @@ class ProfileState {
   final bool isSaveBottonPressed;
   final bool isView;
   final bool isSaveSuccess;
+  final int isReward;
 
   ProfileState({
     @required this.isLoaded,
@@ -19,6 +20,7 @@ class ProfileState {
     @required this.isSaveBottonPressed,
     @required this.isView,
     @required this.isSaveSuccess,
+    @required this.isReward,
   });
 
   factory ProfileState.empty() {
@@ -30,6 +32,7 @@ class ProfileState {
       isSaveBottonPressed: false,
       isView: false,
       isSaveSuccess: false,
+      isReward: -1,
     );
   }
 
@@ -42,6 +45,7 @@ class ProfileState {
       isSaveBottonPressed: false,
       isView: false,
       isSaveSuccess: false,
+      isReward: -1,
     );
   }
 
@@ -54,6 +58,7 @@ class ProfileState {
       isSaveBottonPressed: false,
       isView: false,
       isSaveSuccess: true,
+      isReward: -1,
     );
   }
 
@@ -66,6 +71,7 @@ class ProfileState {
       isSaveBottonPressed: false,
       isView: false,
       isSaveSuccess: false,
+      isReward: -1,
     );
   }
 
@@ -97,12 +103,11 @@ class ProfileState {
     );
   }
 
-  ProfileState updateSaveSuccess({
-    bool isSaveSuccess,
-  }) {
+  ProfileState updateSaveSuccess({bool isSaveSuccess, int isReward}) {
     return copyWith(
       isSaveSuccess: isSaveSuccess,
       isSaveBottonPressed: false,
+      isReward: isReward,
     );
   }
 
@@ -114,6 +119,13 @@ class ProfileState {
     );
   }
 
+  ProfileState successInit() {
+    return copyWith(
+      isSaveSuccess: false,
+      isReward: -1,
+    );
+  }
+
   ProfileState copyWith({
     Profile profile,
     bool isLoaded,
@@ -122,6 +134,7 @@ class ProfileState {
     bool isSaveBottonPressed,
     bool isView,
     bool isSaveSuccess,
+    int isReward,
   }) {
 //    print(isSaveSuccess);
     return ProfileState(
@@ -132,6 +145,7 @@ class ProfileState {
       isSaveBottonPressed: isSaveBottonPressed ?? this.isSaveBottonPressed,
       isView: isView ?? this.isView,
       isSaveSuccess: isSaveSuccess ?? this.isSaveSuccess,
+      isReward: isReward ?? this.isReward,
     );
   }
 }

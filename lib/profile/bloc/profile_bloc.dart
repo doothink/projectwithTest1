@@ -45,6 +45,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       yield* _mapProfileSave(event.viewYn, event.profile);
     } else if (event is ProfileInit) {
       yield* _mapProfileInit();
+    } else if (event is SuccessInit) {
+      yield* _mapSuccessInit();
     }
   }
 
@@ -55,6 +57,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 //      print("]-----] _mapProfileLoadToState::response [-----[ ${response}");
       if (response != null) {
         final profile = Profile.fromJson(response);
+
         yield ProfileState.success(profile);
       }
     } catch (e) {
@@ -82,7 +85,12 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       final response =
           await _authenticationBloc.post('/api/memberprofile', body);
       if (response != null) {
-        yield state.updateSaveSuccess(isSaveSuccess: true);
+        final profile = Profile.fromJson(response);
+        print(
+            "]-----] _mapProfileLoadToState::response [-----[ ${profile.isReward}");
+        yield state.updateSaveSuccess(
+            isSaveSuccess: true,
+            isReward: profile.isReward != null ? profile.isReward : -1);
       }
     } catch (e) {
       print("]-----] error [-----[ ${e}");
@@ -92,5 +100,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   Stream<ProfileState> _mapProfileInit() async* {
     yield ProfileState.empty();
+  }
+
+  Stream<ProfileState> _mapSuccessInit() async* {
+    yield state.successInit();
   }
 }

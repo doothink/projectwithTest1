@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:with_flutter/club/club_screen.dart';
 import 'package:with_flutter/common/empty.dart';
+import 'package:with_flutter/profile_view/profile_view_screen.dart';
 import 'package:with_flutter/searchresult/search_result_jobinfo_card.dart';
 
 import 'bloc/bloc.dart';
@@ -98,6 +99,17 @@ class _SearchTotalMainState extends State<SearchTotalMain> {
                                               child: Column(
                                                 children: <Widget>[
                                                   GestureDetector(
+                                                    onTap: () {
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                ProfileViewScreen(
+                                                                  memberId:
+                                                                      item.id,
+                                                                )),
+                                                      );
+                                                    },
                                                     child: CircleAvatar(
                                                       radius: 42.5,
                                                       child: ClipOval(
@@ -143,7 +155,9 @@ class _SearchTotalMainState extends State<SearchTotalMain> {
                                                       ),
                                                     ),
                                                   ),
-                                                  Text(item.nickName)
+                                                  Text(item.nickName != null
+                                                      ? item.nickName
+                                                      : item.firstName)
                                                 ],
                                               ),
                                             ))

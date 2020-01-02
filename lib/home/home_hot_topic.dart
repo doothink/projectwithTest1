@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:with_flutter/authentication_bloc/authentication_bloc.dart';
 import 'package:with_flutter/common/empty.dart';
+import 'package:with_flutter/common/string_util.dart';
 import 'package:with_flutter/feeddetail/feed_detail_screen.dart';
 import 'package:with_flutter/model/feed.dart';
 import 'package:with_flutter/model/with_card.dart';
@@ -162,10 +163,8 @@ class _HomeHotTopicState extends State<HomeHotTopic> {
                                                                       20
                                                                   ? item
                                                                       .contents
-                                                                  : item
-                                                                      .contents
-                                                                      .substring(
-                                                                          0, 19)
+                                                                  : StringUtils.runeSubstring(item.contents, 0, 19)
+
                                                               : "No Content",
                                                           style:
                                                               const TextStyle(

@@ -9,4 +9,8 @@ class StringUtils {
 
     return returnValue;
   }
+
+  static String runeSubstring(String input, int start, int end) {
+    return String.fromCharCodes(input.runes.toList().sublist(start, end));
+  }
 }

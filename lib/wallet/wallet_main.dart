@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:with_flutter/model/account.dart';
 
 import 'bloc/bloc.dart';
 
@@ -21,14 +22,21 @@ class _WalletMainState extends State<WalletMain> {
     super.initState();
 
     _walletBloc = BlocProvider.of<WalletBloc>(context);
+    _walletBloc.add(WalletLoad());
   }
+
+  Account _account;
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<WalletBloc, WalletState>(
       listener: (context, state) {
+        debugPrint(
+            "]-----] state.isLoaded [-----[ ${state.isLoaded}");
         if (state.isLoaded) {
-          debugPrint("]-----] state.isLoaded [-----[");
+          debugPrint(
+              "]-----] state.isLoaded [-----[ ${state.account.accountBalanceWiken}");
+          _account = state.account;
         }
       },
       child: BlocBuilder<WalletBloc, WalletState>(
@@ -53,7 +61,9 @@ class _WalletMainState extends State<WalletMain> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        "0",
+                        _account != null && _account.accountBalanceWiken > 0
+                            ? _account.accountBalanceWiken.toString()
+                            : "0",
                         style: TextStyle(
                           color: Color.fromRGBO(88, 88, 88, 1),
                           fontWeight: FontWeight.w400,

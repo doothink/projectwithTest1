@@ -61,3 +61,8 @@ class ProfileSave extends ProfileEvent {
   @override
   String toString() => 'ProfileSave { viewYn: $viewYn}';
 }
+
+class SuccessInit extends ProfileEvent {
+  @override
+  String toString() => 'SuccessInit';
+}

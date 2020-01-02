@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:with_flutter/authentication_bloc/authentication.dart';
+import 'package:with_flutter/model/account.dart';
 
 import 'bloc.dart';
 
@@ -40,10 +41,18 @@ class WalletBloc extends Bloc<WalletEvent, WalletState> {
   }
 
   Stream<WalletState> _mapWalletsLoadToState() async* {
+    print("]-----] isLoading [-----[ ${state.isLoading}");
     if (!state.isLoading) {
+      print("]-----] isLoading 1[-----[ ${state.isLoading}");
       yield state.updateLoading(isLoading: true);
       try {
-        yield state.loaedSuccess();
+        final response = await _authenticationBloc.get('/api/account');
+        print("]-----] response 1[-----[ ${response}");
+        if (response != null) {
+          final account = Account.fromJson(response);
+          print("]-----] account 1[-----[ ${account}");
+          yield state.loaedSuccess(account: account);
+        }
       } catch (error) {
         print("]-----] error [-----[ ${error}");
         yield WalletState.failure();

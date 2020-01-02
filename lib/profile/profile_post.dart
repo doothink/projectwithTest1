@@ -404,7 +404,21 @@ class _ProfilePostState extends State<ProfilePost> {
           _loadingDialog(context);
         }
         if (state.isSaveSuccess) {
-          print("]-----] isSaveSuccess [-----[");
+          print("]-----] isSaveSuccess [-----[ ${state.isReward}");
+          if (state.isReward > 0) {
+            _onWidgetDidBuild(() {
+              return showDialog(
+                  context: context,
+                  builder: (BuildContext context) => dialogReward);
+            });
+          } else {
+            _onWidgetDidBuild(() {
+              return showDialog(
+                  context: context,
+                  builder: (BuildContext context) => dialogOk);
+            });
+          }
+          _profileBloc.add(SuccessInit());
 //          Navigator.of(context, rootNavigator: true).pop();
         }
       },
@@ -1786,6 +1800,12 @@ class _ProfilePostState extends State<ProfilePost> {
     super.dispose();
   }
 
+  void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      callback();
+    });
+  }
+
   _handleSubmit(bool viewYn) {
     List<SchoolHistory> schoolHistories = [];
     if (_schoolList.length > 0) {
@@ -1957,6 +1977,101 @@ class _ProfilePostState extends State<ProfilePost> {
       },
     );
   }
+
+  AlertDialog dialogReward = AlertDialog(
+      content: SingleChildScrollView(
+    child: Container(
+//      height: 260,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                "10",
+                style: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  fontFamily: "NotoSansCJKkr-Bold",
+                  fontStyle: FontStyle.normal,
+                  fontSize: 60.0,
+                  color: Color.fromRGBO(150, 150, 150, 1),
+                ),
+              ),
+              Container(
+                width: 78,
+                child: Image(
+                  image: AssetImage('assets/images/wiken@3x.png'),
+                  width: 78,
+                  height: 50,
+                ),
+              ),
+            ],
+          ),
+          Stack(children: <Widget>[
+            Container(
+              child: Image(
+                image: AssetImage('assets/images/wikenpop@3x.png'),
+                width: 333,
+//                  height: 50,
+              ),
+            ),
+            Positioned(
+              top: 5,
+              left: 0,
+              right: 0,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      "프로필완료 보상으로",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontFamily: "NotoSansCJKkr-Medium",
+                        fontStyle: FontStyle.normal,
+                        fontSize: 15.0,
+                        color: Color.fromRGBO(150, 150, 150, 1),
+                      ),
+                    ),
+                    Text(
+                      "10 WIKEN이 지급되었습니다!",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontFamily: "NotoSansCJKkr-Medium",
+                        fontStyle: FontStyle.normal,
+                        fontSize: 12.0,
+                        color: Color.fromRGBO(150, 150, 150, 1),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ]),
+        ],
+      ),
+    ),
+  ));
+
+  AlertDialog dialogOk = AlertDialog(
+      content: Center(
+    child: Column(
+      children: <Widget>[
+        Row(
+          children: <Widget>[
+            Text(
+              "저장되었습니다.",
+              style: TextStyle(fontSize: 20.0),
+            ),
+          ],
+        ),
+      ],
+    ),
+  ));
 }
 
 class School {

@@ -82,6 +82,7 @@ Profile _$ProfileFromJson(Map<String, dynamic> json) {
             ? null
             : MediaCollection.fromJson(e as Map<String, dynamic>))
         ?.toList(),
+    isReward: json['isReward'] as int,
   );
 }
 
@@ -146,4 +147,5 @@ Map<String, dynamic> _$ProfileToJson(Profile instance) => <String, dynamic>{
           instance.memberPlayerHistories?.map((e) => e?.toJson())?.toList(),
       'mediaCollections':
           instance.mediaCollections?.map((e) => e?.toJson())?.toList(),
+      'isReward': instance.isReward,
     };
