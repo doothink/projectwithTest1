@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:with_flutter/authentication_bloc/bloc.dart';
 import 'package:with_flutter/common/empty.dart';
 import 'package:with_flutter/jobinfoapply/jobinfo_apply.dart';
+import 'package:with_flutter/jobinfoheart/jobinfo_heart.dart';
 
 import 'bloc/bloc.dart';
 import 'profile.dart';
@@ -152,11 +153,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   onTap: () {
                     Navigator.pop(context);
-//                    Navigator.push(
-//                      context,
-//                      MaterialPageRoute(
-//                          builder: (context) => JobInfoApplyScreen()),
-//                    );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => JobInfoHeartScreen()),
+                    );
                   },
                 ),
                 Divider(
