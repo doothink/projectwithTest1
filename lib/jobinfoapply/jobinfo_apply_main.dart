@@ -46,13 +46,22 @@ class _JobInfoApplyMainState extends State<JobInfoApplyMain> {
               ? Container(
                   color: Color.fromRGBO(248, 248, 248, 1),
                   child: ListView.builder(
+                      controller: _scrollController,
                       padding: const EdgeInsets.all(0),
-                      itemCount: _jobInfoApplies.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return JobInfoApplyCard(
-                          jobInfoApply: _jobInfoApplies[index],
-                        );
-                      }),
+                      itemCount: _jobInfoApplies != null
+                          ? state.hasReachedMax
+                              ? _jobInfoApplies.length
+                              : _jobInfoApplies.length + 1
+                          : 0,
+                      itemBuilder: (BuildContext context, int index) =>
+                          index >= _jobInfoApplies.length
+                              ? BottomLoader()
+                              : JobInfoApplyCard(
+                                  jobInfoApply: _jobInfoApplies[index])
+//                        return JobInfoApplyCard(
+//                          jobInfoApply: _jobInfoApplies[index],
+//                        );
+                      ),
                 )
               : EmptyWidget();
         },

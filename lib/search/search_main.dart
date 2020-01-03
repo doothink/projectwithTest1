@@ -69,7 +69,10 @@ class _SearchMainState extends State<SearchMain> {
               backgroundColor: Colors.white,
               title: Container(
                   alignment: Alignment.centerLeft,
-                  child: TextField(
+                  child: TextFormField(
+                    onFieldSubmitted: (term) {
+                      _setSearchValue();
+                    },
                     controller: _searchController,
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(

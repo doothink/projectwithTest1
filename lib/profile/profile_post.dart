@@ -806,7 +806,7 @@ class _ProfilePostState extends State<ProfilePost> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  "좋아하는 축구 구단",
+                                  "좋아하는 축구팀",
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w400,
@@ -820,7 +820,7 @@ class _ProfilePostState extends State<ProfilePost> {
                                   decoration: InputDecoration(
                                     contentPadding:
                                         const EdgeInsets.only(bottom: -10),
-//                                    hintText: '축구',
+                                    hintText: '울산현대',
                                     hintStyle: TextStyle(
                                       fontSize: 16,
                                       color: const Color.fromRGBO(
@@ -1593,7 +1593,7 @@ class _ProfilePostState extends State<ProfilePost> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            "이적 전 구단",
+                            "이적 전 팀",
                             style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w400,
@@ -1607,7 +1607,7 @@ class _ProfilePostState extends State<ProfilePost> {
                             decoration: InputDecoration(
                               contentPadding:
                                   const EdgeInsets.only(bottom: -10),
-                              hintText: '나이키',
+                              hintText: '울산현대',
                               hintStyle: TextStyle(
                                 fontSize: 16,
                                 color: const Color.fromRGBO(222, 222, 222, 1),
@@ -1623,7 +1623,7 @@ class _ProfilePostState extends State<ProfilePost> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            "이적 후 구단",
+                            "이적 후 팀",
                             style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w400,
@@ -1637,7 +1637,7 @@ class _ProfilePostState extends State<ProfilePost> {
                             decoration: InputDecoration(
                               contentPadding:
                                   const EdgeInsets.only(bottom: -10),
-                              hintText: '이적 후 구단',
+                              hintText: '이적 후 팀',
                               hintStyle: TextStyle(
                                 fontSize: 16,
                                 color: const Color.fromRGBO(222, 222, 222, 1),
@@ -2058,18 +2058,18 @@ class _ProfilePostState extends State<ProfilePost> {
   ));
 
   AlertDialog dialogOk = AlertDialog(
-      content: Center(
-    child: Column(
-      children: <Widget>[
-        Row(
-          children: <Widget>[
-            Text(
-              "저장되었습니다.",
-              style: TextStyle(fontSize: 20.0),
-            ),
-          ],
+      content: Container(
+    height: 100,
+    child: Center(
+      child: Text(
+        "저장되었습니다.",
+        style: TextStyle(
+          fontSize: 20.0,
+          fontWeight: FontWeight.w400,
+          fontFamily: "NotoSansCJKkr-Medium",
+          fontStyle: FontStyle.normal,
         ),
-      ],
+      ),
     ),
   ));
 }

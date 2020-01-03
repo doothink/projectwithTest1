@@ -125,6 +125,7 @@ class _ProfileViewMainState extends State<ProfileViewMain> {
   }
 
   List<Injuary> _injuaryHistoryList = [];
+
   Injuary _makeInjuaryHistoryInput(InjuaryHistory injuaryHistory) {
     TextEditingController _yaerController = TextEditingController();
     TextEditingController _contentController = TextEditingController();
@@ -243,7 +244,6 @@ class _ProfileViewMainState extends State<ProfileViewMain> {
       },
       child: BlocBuilder<ProfileViewBloc, ProfileViewState>(
         builder: (context, state) {
-
           return _profile != null
               ? Container(
                   child: SafeArea(
@@ -382,7 +382,6 @@ class _ProfileViewMainState extends State<ProfileViewMain> {
                                         builder:
                                             (FormFieldState<String> state) {
                                           return InputDecorator(
-
                                             textAlign: TextAlign.center,
                                             decoration: InputDecoration(
                                               contentPadding:
@@ -404,10 +403,8 @@ class _ProfileViewMainState extends State<ProfileViewMain> {
                                                   : null,
                                             ),
                                             child: DropdownButtonHideUnderline(
-
                                               child:
                                                   DropdownButton<GenderSelect>(
-
                                                 value: null,
                                                 iconSize: 0,
                                                 isExpanded: true,
@@ -446,7 +443,6 @@ class _ProfileViewMainState extends State<ProfileViewMain> {
                                                     ),
                                                   ],
                                                 ),
-
                                                 items: _selectGender
                                                     .map((GenderSelect item) {
                                                   return DropdownMenuItem<
@@ -575,7 +571,7 @@ class _ProfileViewMainState extends State<ProfileViewMain> {
                                         CrossAxisAlignment.start,
                                     children: <Widget>[
                                       Text(
-                                        "좋아하는 축구 구단",
+                                        "좋아하는 축구팀",
                                         style: TextStyle(
                                           color: Colors.black,
                                           fontWeight: FontWeight.w400,
@@ -590,7 +586,7 @@ class _ProfileViewMainState extends State<ProfileViewMain> {
                                         decoration: InputDecoration(
                                           contentPadding: const EdgeInsets.only(
                                               bottom: -10),
-//                                    hintText: '축구',
+                                          hintText: '울산현대',
                                           hintStyle: TextStyle(
                                             fontSize: 16,
                                             color: const Color.fromRGBO(
