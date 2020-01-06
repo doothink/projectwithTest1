@@ -47,7 +47,7 @@ class _HomeHotTopicState extends State<HomeHotTopic> {
             return Container(
               width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.only(
-                  top: 15.0, bottom: 10.0, left: 15.0, right: 15.0),
+                  top: 20.0, bottom: 10.0, left: 15.0, right: 15.0),
               decoration:
                   BoxDecoration(color: Color.fromRGBO(234, 234, 234, 1)),
               child: Column(
@@ -84,7 +84,7 @@ class _HomeHotTopicState extends State<HomeHotTopic> {
                                         children: <Widget>[
                                           Stack(children: <Widget>[
                                             Container(
-                                              height: 155.0,
+                                              height: 195.0,
                                               decoration: BoxDecoration(
                                                 image: DecorationImage(
                                                   fit: BoxFit.fill,

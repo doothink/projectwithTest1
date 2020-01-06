@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_kakao_login/flutter_kakao_login.dart';
 import 'package:with_flutter/authentication_bloc/bloc.dart';
+import 'package:with_flutter/home/home_screen.dart';
 import 'package:with_flutter/login/login.dart';
 import 'package:with_flutter/register/register.dart';
 
@@ -106,9 +107,10 @@ class _LoginFormState extends State<LoginForm> {
                         style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w400,
-                            fontFamily: "NotoSansCJKkr-Bold",
+                            fontFamily: "NotoSansCJKkr-Regular",
                             fontStyle: FontStyle.normal,
-                            fontSize: 20.0),
+                            fontSize: 20.0,
+                            letterSpacing: 0.1),
                       ),
                     ),
                     Text(
@@ -116,18 +118,20 @@ class _LoginFormState extends State<LoginForm> {
                       style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w400,
-                          fontFamily: "NotoSansCJKkr-Bold",
+                          fontFamily: "NotoSansCJKkr-Regular",
                           fontStyle: FontStyle.normal,
-                          fontSize: 20.0),
+                          fontSize: 20.0,
+                          letterSpacing: 0.1),
                     ),
                     Text(
                       "위드입니다.",
                       style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w400,
-                          fontFamily: "NotoSansCJKkr-Bold",
+                          fontFamily: "NotoSansCJKkr-Regular",
                           fontStyle: FontStyle.normal,
-                          fontSize: 20.0),
+                          fontSize: 20.0,
+                          letterSpacing: 0.1),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 22.0),

@@ -47,11 +47,12 @@ class _HomeRecommendationState extends State<HomeRecommendation> {
               width: MediaQuery.of(context).size.width,
 //            height: 190.0,
               padding: EdgeInsets.only(
-                  top: 10.0, bottom: 23.0, left: 15.0, right: 15.0),
+                  top: 10.0, bottom: 3.0, left: 15.0, right: 15.0),
               child: Column(
 //              mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+
                   Text(
                     "추천",
                     style: const TextStyle(
@@ -62,17 +63,20 @@ class _HomeRecommendationState extends State<HomeRecommendation> {
                       fontSize: 17.0,
                     ),
                   ),
+                  Text("",
+                      style: const TextStyle(fontSize:2)),
+
                   Container(
                     padding: EdgeInsets.only(top: 8.0),
                     child: _members != null && _members.length > 0
                         ? Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: _members
-                                .map((item) => HomeHomeRecommendationCard(
-                                      member: item,
-                                    ))
-                                .toList(),
-                          )
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: _members
+                          .map((item) => HomeHomeRecommendationCard(
+                        member: item,
+                      ))
+                          .toList(),
+                    )
                         : EmptyWidget(),
                   ),
                 ],

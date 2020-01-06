@@ -60,7 +60,8 @@ class LoginIntroFirst extends StatelessWidget {
                           fontWeight: FontWeight.w400,
                           fontFamily: "NotoSansCJKkr-Regular",
                           fontStyle: FontStyle.normal,
-                          fontSize: 20.0,
+                          fontSize: 19.0,
+
                         ),
                         textAlign: TextAlign.left),
                     Text("기회와 WINT를 얻으세요",
@@ -69,7 +70,7 @@ class LoginIntroFirst extends StatelessWidget {
                           fontWeight: FontWeight.w400,
                           fontFamily: "NotoSansCJKkr-Regular",
                           fontStyle: FontStyle.normal,
-                          fontSize: 20.0,
+                          fontSize: 19.0,
                         ),
                         textAlign: TextAlign.left),
                   ],
