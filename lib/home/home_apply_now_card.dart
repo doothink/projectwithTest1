@@ -43,7 +43,7 @@ class _HomeApplyNowCardState extends State<HomeApplyNowCard> {
                     height: 130.0,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        fit: BoxFit.fill,
+                        fit: BoxFit.cover,
                         image: CachedNetworkImageProvider(
                             _jobInfo.club.mediaCollections[0].fullPathS3),
                       ),

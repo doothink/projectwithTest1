@@ -70,9 +70,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
       body: BlocProvider<ProfileBloc>(
           builder: (context) => _profileBloc,
-          child: SingleChildScrollView(
-            controller: _scrollController,
-            child: ProfilePost(),
+          child: SafeArea(
+            child: SingleChildScrollView(
+              controller: _scrollController,
+              child: ProfilePost(),
+            ),
           )),
       endDrawer: Drawer(
         child: SafeArea(

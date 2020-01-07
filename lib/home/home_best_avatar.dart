@@ -1,13 +1,7 @@
-import 'dart:typed_data';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:with_flutter/common/date_util.dart';
-import 'package:with_flutter/feeddetail/feed_detail.dart';
-import 'package:with_flutter/model/feed.dart';
 import 'package:with_flutter/model/member.dart';
 import 'package:with_flutter/profile_view/profile_view_screen.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class HomeBestAvatar extends StatelessWidget {
   final Member _member;
@@ -45,6 +39,7 @@ class HomeBestAvatar extends StatelessWidget {
                           _member.memberProfile.mediaCollections[0].fullPathS3)
                       : AssetImage('assets/images/nophoto@3x.png'),
                   width: 43,
+                  fit: BoxFit.cover,
                 ),
               ),
             ),

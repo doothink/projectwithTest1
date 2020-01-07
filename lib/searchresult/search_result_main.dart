@@ -36,6 +36,10 @@ class _SearchResultMainState extends State<SearchResultMain> {
 
   @override
   Widget build(BuildContext context) {
+
+    double cardWidth = MediaQuery.of(context).size.width / 2;
+    double cardHeight = MediaQuery.of(context).size.height / 3.6;
+
     return BlocListener<SearchResultBloc, SearchResultState>(
       listener: (context, state) {
         if (state.isLoaded) {
@@ -49,29 +53,28 @@ class _SearchResultMainState extends State<SearchResultMain> {
 //            padding: EdgeInsets.only(top: 13, left: 15, right: 15),
             child: state.jobInfos != null && state.jobInfos.length > 0
                 ? Container(
-                  width: MediaQuery.of(context).size.width,
-                  alignment: Alignment.centerLeft,
-                  child: GridView.count(
-                    shrinkWrap: true,
-                    mainAxisSpacing: 4,
-                    crossAxisSpacing: 4,
-                    crossAxisCount: 2,
-//                        childAspectRatio: 0.95,
-                    children:
-                        List.generate(state.jobInfos.length, (index) {
-                      return SearchResultJobInfoCard(
-                        jobInfo: state.jobInfos[index],
-                      );
-                    }),
-                  ),
-                )
+                    width: MediaQuery.of(context).size.width,
+                    alignment: Alignment.centerLeft,
+                    child: GridView.count(
+                      shrinkWrap: true,
+                      mainAxisSpacing: 4,
+                      crossAxisSpacing: 4,
+                      crossAxisCount: 2,
+                      childAspectRatio: cardWidth / cardHeight,
+                      children: List.generate(state.jobInfos.length, (index) {
+                        return SearchResultJobInfoCard(
+                          cardHeight: cardHeight,
+                          jobInfo: state.jobInfos[index],
+                        );
+                      }),
+                    ),
+                  )
                 : Container(
                     child: Center(
                     child: Padding(
                       padding: const EdgeInsets.only(top: 28.0),
                       child: Image(
-                        image: AssetImage(
-                            'assets/images/search-nodata@3x.png'),
+                        image: AssetImage('assets/images/search-nodata@3x.png'),
                         width: 181,
                         height: 156,
                       ),

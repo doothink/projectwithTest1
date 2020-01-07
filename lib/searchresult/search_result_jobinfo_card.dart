@@ -7,9 +7,14 @@ import 'package:with_flutter/model/jobInfo.dart';
 
 class SearchResultJobInfoCard extends StatelessWidget {
   final JobInfo _jobInfo;
+  final double _cardHeight;
 
-  SearchResultJobInfoCard({Key key, JobInfo jobInfo})
-      : _jobInfo = jobInfo,
+  SearchResultJobInfoCard({
+    Key key,
+    JobInfo jobInfo,
+    double cardHeight,
+  })  : _jobInfo = jobInfo,
+        _cardHeight = cardHeight,
         super(key: key);
 
   @override
@@ -17,14 +22,13 @@ class SearchResultJobInfoCard extends StatelessWidget {
     return Card(
       elevation: 5,
       shape: RoundedRectangleBorder(
-
         borderRadius: BorderRadius.circular(0),
       ),
       child: Column(
         children: <Widget>[
           GestureDetector(
             child: Container(
-              height: 130.0,
+              height: _cardHeight - 80,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.fill,
@@ -46,8 +50,8 @@ class SearchResultJobInfoCard extends StatelessWidget {
           Container(
             width: double.infinity,
 //            height: 180,
-            padding: EdgeInsets.only(
-                top: 4.0, bottom: 4.0, left: 8.0, right: 1.0),
+            padding:
+                EdgeInsets.only(top: 4.0, bottom: 4.0, left: 8.0, right: 1.0),
             decoration: BoxDecoration(color: Colors.white),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
