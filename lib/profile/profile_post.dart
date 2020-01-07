@@ -1829,8 +1829,8 @@ class _ProfilePostState extends State<ProfilePost> {
         ));
       }
     }
-    print("_gender ===[ ${_gender.title}");
-    print("_gender ===[ ${_countryController.text}");
+//    print("_gender ===[ ${_gender.title}");
+//    print("_gender ===[ ${_countryController.text}");
     Profile profile = new Profile(
       nickName: _nickNameController.text,
       country: _countryController.text,
