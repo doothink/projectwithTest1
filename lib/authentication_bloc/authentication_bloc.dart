@@ -16,6 +16,7 @@ class AuthenticationBloc
 //  final String apiUrl = API_URL_LOCAL;
 
   final String apiUrl = API_URL_DEV;
+
 //  final String apiUrl = API_URL_PROD;
 
   AuthenticationBloc({
@@ -167,8 +168,8 @@ class AuthenticationBloc
             "Authorization": accessToken
           },
           body: body);
-      print(response);
-      print(response.statusCode);
+//      print(response);
+//      print(response.statusCode);
       if (response.statusCode == 200) {
         return json.decode(response.body);
       } else if (response.statusCode == 401) {

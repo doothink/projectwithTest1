@@ -39,7 +39,9 @@ class _JobInfoHeartMainState extends State<JobInfoHeartMain> {
       listener: (context, state) {
         if (state.isLoaded) {
           debugPrint("======== ${state.jobInfoHearts.length}");
-          _jobInfoHearts = state.jobInfoHearts;
+          setState(() {
+            _jobInfoHearts = state.jobInfoHearts;
+          });
         }
       },
       child: BlocBuilder<JobInfoHeartBloc, JobInfoHeartState>(
@@ -47,7 +49,7 @@ class _JobInfoHeartMainState extends State<JobInfoHeartMain> {
           return _jobInfoHearts != null
               ? Container(
                   width: MediaQuery.of(context).size.width,
-                  alignment: Alignment.centerLeft,
+//                  alignment: Alignment.centerLeft,
                   child: GridView.count(
                     controller: _scrollController,
                     shrinkWrap: true,

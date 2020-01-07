@@ -5,6 +5,8 @@ import 'package:with_flutter/authentication_bloc/bloc.dart';
 import 'package:with_flutter/common/empty.dart';
 import 'package:with_flutter/jobinfoapply/jobinfo_apply.dart';
 import 'package:with_flutter/jobinfoheart/jobinfo_heart.dart';
+import 'package:with_flutter/notice/notice.dart';
+import 'package:with_flutter/policy/policy_site_screen.dart';
 
 import 'bloc/bloc.dart';
 import 'profile.dart';
@@ -41,8 +43,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Color.fromRGBO(248, 248, 248, 1),
-        bottomOpacity: 0.0,
-        elevation: 0.0,
+//        bottomOpacity: 0.0,
+//        elevation: 0.0,
         title: const Text('내정보'),
         actions: <Widget>[
 //          IconButton(
@@ -120,6 +122,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   onTap: () {
                     Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => NoticeScreen()),
+                    );
                   },
                 ),
                 Divider(
@@ -195,6 +201,44 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => JobInfoApplyScreen()),
+                    );
+                  },
+                ),
+                Divider(
+                  indent: 60,
+                  endIndent: 20,
+                  color: Color.fromRGBO(112, 112, 112, 1),
+                ),
+                ListTile(
+                  contentPadding: EdgeInsets.only(left: 28),
+                  dense: true,
+                  title: Row(
+                    children: <Widget>[
+                      Image(
+                        image: AssetImage('assets/images/icons/1895@3x.png'),
+                        width: 22.3,
+                        height: 22,
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 25),
+                        child: Text(
+                          '이용약관',
+                          style: const TextStyle(
+                              color: const Color(0xff4a4a4a),
+                              fontWeight: FontWeight.w500,
+                              fontFamily: "NotoSansCJKkr-Medium",
+                              fontStyle: FontStyle.normal,
+                              fontSize: 16.0),
+                        ),
+                      ),
+                    ],
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PolicySiteScreen()),
                     );
                   },
                 ),
