@@ -494,7 +494,7 @@ class _ProfilePostState extends State<ProfilePost> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: <Widget>[
                                 TextFormField(
-                                  enabled: false,
+//                                  enabled: false,
                                   controller: _nickNameController,
                                   decoration: InputDecoration(
                                     contentPadding:
@@ -1365,7 +1365,7 @@ class _ProfilePostState extends State<ProfilePost> {
                               )
                             ],
                           ),
-                          _schoolList.length > 0
+                          _schoolList != null && _schoolList.length > 0
                               ? Column(
                                   children: _schoolList.map((item) {
                                     return item.profileSchoolInput;
@@ -1832,6 +1832,7 @@ class _ProfilePostState extends State<ProfilePost> {
     print("_gender ===[ ${_gender.title}");
     print("_gender ===[ ${_countryController.text}");
     Profile profile = new Profile(
+      nickName: _nickNameController.text,
       country: _countryController.text,
       gender: _gender.value,
       birthday: _birthdayController.text,

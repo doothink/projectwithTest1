@@ -3,17 +3,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:with_flutter/common/empty.dart';
 import 'package:with_flutter/common/string_util.dart';
 import 'package:with_flutter/model/injuaryHistory.dart';
 import 'package:with_flutter/model/playerHistory.dart';
 import 'package:with_flutter/model/profile.dart';
 import 'package:with_flutter/model/schoolHistory.dart';
-import 'package:with_flutter/profile/profile_injuaryhistory_input.dart';
-import 'package:with_flutter/profile/profile_school_input.dart';
+import 'package:with_flutter/profile/profile_radio_slider.dart';
 import 'package:with_flutter/profile_view/profile_injuaryhistory_view.dart';
 import 'package:with_flutter/profile_view/profile_school_view.dart';
+import 'package:with_flutter/profile_view/profile_view_radio_slider.dart';
 
 import 'bloc/bloc.dart';
 
@@ -630,6 +629,567 @@ class _ProfileViewMainState extends State<ProfileViewMain> {
                                     ],
                                   ),
                                 ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 30),
+                                  child: Column(
+                                    children: <Widget>[
+                                      Text(
+                                        "선수 정보 입력",
+                                        style: const TextStyle(
+                                            color:
+                                                Color.fromRGBO(0, 166, 219, 1),
+                                            fontWeight: FontWeight.w400,
+                                            fontFamily: "NotoSansCJKkr-Bold",
+                                            fontStyle: FontStyle.normal,
+                                            fontSize: 18.0),
+                                      ),
+                                      Container(
+                                        margin: EdgeInsets.only(top: 25.5),
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          "플레이어 기본 역량",
+                                          style: const TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w400,
+                                              fontFamily: "NotoSansCJKkr-Bold",
+                                              fontStyle: FontStyle.normal,
+                                              fontSize: 15.0),
+                                        ),
+                                      ),
+                                      Container(
+                                        margin: EdgeInsets.only(top: 20.5),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text(
+                                              "피지컬",
+                                              style: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.w400,
+                                                  fontFamily:
+                                                      "NotoSansCJKkr-Bold",
+                                                  fontStyle: FontStyle.normal,
+                                                  fontSize: 15.0),
+                                            ),
+                                            Container(
+                                              margin:
+                                                  EdgeInsets.only(top: 15.5),
+                                              child: ProfileViewRadioSlider(
+                                                count: 5,
+                                                activeColor: Color.fromRGBO(
+                                                    0, 166, 219, 1),
+                                                value: _playerInfoPhysical,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        margin: EdgeInsets.only(top: 20.5),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text(
+                                              "기술",
+                                              style: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.w400,
+                                                  fontFamily:
+                                                      "NotoSansCJKkr-Bold",
+                                                  fontStyle: FontStyle.normal,
+                                                  fontSize: 15.0),
+                                            ),
+                                            Container(
+                                              margin:
+                                                  EdgeInsets.only(top: 15.5),
+                                              child: ProfileViewRadioSlider(
+                                                count: 5,
+                                                activeColor: Color.fromRGBO(
+                                                    0, 166, 219, 1),
+                                                value: _playerInfoSkill != null
+                                                    ? _playerInfoSkill
+                                                    : 0,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        margin: EdgeInsets.only(top: 20.5),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text(
+                                              "창의성",
+                                              style: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.w400,
+                                                  fontFamily:
+                                                      "NotoSansCJKkr-Bold",
+                                                  fontStyle: FontStyle.normal,
+                                                  fontSize: 15.0),
+                                            ),
+                                            Container(
+                                              margin:
+                                                  EdgeInsets.only(top: 15.5),
+                                              child: ProfileViewRadioSlider(
+                                                count: 5,
+                                                activeColor: Color.fromRGBO(
+                                                    0, 166, 219, 1),
+                                                value:
+                                                    _playerInfoCreative != null
+                                                        ? _playerInfoCreative
+                                                        : 0,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        margin: EdgeInsets.only(top: 20.5),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text(
+                                              "전략",
+                                              style: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.w400,
+                                                  fontFamily:
+                                                      "NotoSansCJKkr-Bold",
+                                                  fontStyle: FontStyle.normal,
+                                                  fontSize: 15.0),
+                                            ),
+                                            Container(
+                                              margin:
+                                                  EdgeInsets.only(top: 15.5),
+                                              child: ProfileViewRadioSlider(
+                                                count: 5,
+                                                activeColor: Color.fromRGBO(
+                                                    0, 166, 219, 1),
+                                                value:
+                                                    _playerInfoStrategy != null
+                                                        ? _playerInfoStrategy
+                                                        : 0,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        margin: EdgeInsets.only(top: 20.5),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text(
+                                              "팀워크",
+                                              style: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.w400,
+                                                  fontFamily:
+                                                      "NotoSansCJKkr-Bold",
+                                                  fontStyle: FontStyle.normal,
+                                                  fontSize: 15.0),
+                                            ),
+                                            Container(
+                                              margin:
+                                                  EdgeInsets.only(top: 15.5),
+                                              child: ProfileViewRadioSlider(
+                                                count: 5,
+                                                activeColor: Color.fromRGBO(
+                                                    0, 166, 219, 1),
+                                                value:
+                                                    _playerInfoTeamWork != null
+                                                        ? _playerInfoTeamWork
+                                                        : 0,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 30),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        "플레이어 레벨",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: "NotoSansCJKkr-Bold",
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 15.0,
+                                        ),
+                                      ),
+                                      TextFormField(
+                                        enabled: false,
+                                        controller: _playerInfoLevelController,
+                                        decoration: InputDecoration(
+                                          contentPadding: const EdgeInsets.only(
+                                              bottom: -10),
+                                          hintText: '플레이어 레벨',
+                                          hintStyle: TextStyle(
+                                            fontSize: 16,
+                                            color: const Color.fromRGBO(
+                                                222, 222, 222, 1),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 30),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        "소속된 팀명",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: "NotoSansCJKkr-Bold",
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 15.0,
+                                        ),
+                                      ),
+                                      TextFormField(
+                                        enabled: false,
+                                        controller: _clubNameController,
+                                        decoration: InputDecoration(
+                                          contentPadding: const EdgeInsets.only(
+                                              bottom: -10),
+                                          hintText: '소속된 팀명',
+                                          hintStyle: TextStyle(
+                                            fontSize: 16,
+                                            color: const Color.fromRGBO(
+                                                222, 222, 222, 1),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 30),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        "리그소속 국가",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: "NotoSansCJKkr-Bold",
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 15.0,
+                                        ),
+                                      ),
+                                      TextFormField(
+                                        enabled: false,
+                                        controller: _countryOfLeagueController,
+                                        decoration: InputDecoration(
+                                          contentPadding: const EdgeInsets.only(
+                                              bottom: -10),
+                                          hintText: '리그소속 국가',
+                                          hintStyle: TextStyle(
+                                            fontSize: 16,
+                                            color: const Color.fromRGBO(
+                                                222, 222, 222, 1),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 30),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        "소속된 리그",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: "NotoSansCJKkr-Bold",
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 15.0,
+                                        ),
+                                      ),
+                                      TextFormField(
+                                        enabled: false,
+                                        controller: _leagueNameController,
+                                        decoration: InputDecoration(
+                                          contentPadding: const EdgeInsets.only(
+                                              bottom: -10),
+                                          hintText: '소속된 리그',
+                                          hintStyle: TextStyle(
+                                            fontSize: 16,
+                                            color: const Color.fromRGBO(
+                                                222, 222, 222, 1),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 30),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        "키",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: "NotoSansCJKkr-Bold",
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 15.0,
+                                        ),
+                                      ),
+                                      TextFormField(
+                                        enabled: false,
+                                        controller: _playerHeightController,
+                                        keyboardType: TextInputType.phone,
+                                        decoration: InputDecoration(
+                                          contentPadding: const EdgeInsets.only(
+                                              bottom: -10),
+                                          hintText: '키',
+                                          hintStyle: TextStyle(
+                                            fontSize: 16,
+                                            color: const Color.fromRGBO(
+                                                222, 222, 222, 1),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 30),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        "몸무게",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: "NotoSansCJKkr-Bold",
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 15.0,
+                                        ),
+                                      ),
+                                      TextFormField(
+                                        enabled: false,
+//                            inputFormatters: [_playerWeightFormatter],
+                                        controller: _playerWeightController,
+                                        keyboardType: TextInputType.phone,
+                                        decoration: InputDecoration(
+                                          contentPadding: const EdgeInsets.only(
+                                              bottom: -10),
+                                          hintText: '몸무게',
+                                          hintStyle: TextStyle(
+                                            fontSize: 16,
+                                            color: const Color.fromRGBO(
+                                                222, 222, 222, 1),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 30),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        "등번호",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: "NotoSansCJKkr-Bold",
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 15.0,
+                                        ),
+                                      ),
+                                      TextFormField(
+                                        enabled: false,
+                                        controller: _backNumberController,
+                                        keyboardType: TextInputType.phone,
+                                        decoration: InputDecoration(
+                                          contentPadding: const EdgeInsets.only(
+                                              bottom: -10),
+                                          hintText: '등번호',
+                                          hintStyle: TextStyle(
+                                            fontSize: 16,
+                                            color: const Color.fromRGBO(
+                                                222, 222, 222, 1),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 30),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        "주 사용 발",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: "NotoSansCJKkr-Bold",
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 15.0,
+                                        ),
+                                      ),
+                                      TextFormField(
+                                        enabled: false,
+                                        controller: _mainKickController,
+                                        decoration: InputDecoration(
+                                          contentPadding: const EdgeInsets.only(
+                                              bottom: -10),
+                                          hintText: '주 사용 발',
+                                          hintStyle: TextStyle(
+                                            fontSize: 16,
+                                            color: const Color.fromRGBO(
+                                                222, 222, 222, 1),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 30),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        "포지션",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: "NotoSansCJKkr-Bold",
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 15.0,
+                                        ),
+                                      ),
+                                      TextFormField(
+                                        enabled: false,
+                                        controller: _positionController,
+                                        decoration: InputDecoration(
+                                          contentPadding: const EdgeInsets.only(
+                                              bottom: -10),
+                                          hintText: "포지션",
+                                          hintStyle: TextStyle(
+                                            fontSize: 16,
+                                            color: const Color.fromRGBO(
+                                                222, 222, 222, 1),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 30),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        "포지션 역할",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: "NotoSansCJKkr-Bold",
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 15.0,
+                                        ),
+                                      ),
+                                      TextFormField(
+                                        enabled: false,
+                                        controller: _positionRoleController,
+                                        decoration: InputDecoration(
+                                          contentPadding: const EdgeInsets.only(
+                                              bottom: -10),
+                                          hintText: "포지션 역할",
+                                          hintStyle: TextStyle(
+                                            fontSize: 16,
+                                            color: const Color.fromRGBO(
+                                                222, 222, 222, 1),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                _schoolList != null && _schoolList.length > 0
+                                    ? Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        margin: EdgeInsets.only(top: 30),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: <Widget>[
+                                                Text(
+                                                  "학력",
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.w400,
+                                                    fontFamily:
+                                                        "NotoSansCJKkr-Bold",
+                                                    fontStyle: FontStyle.normal,
+                                                    fontSize: 15.0,
+                                                  ),
+                                                ),
+                                                Icon(
+                                                  Icons.add,
+                                                  color: Color.fromRGBO(
+                                                      0, 166, 219, 1),
+                                                )
+                                              ],
+                                            ),
+                                            Column(
+                                              children: _schoolList.map((item) {
+                                                return item.profileSchoolView;
+                                              }).toList(),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    : EmptyWidget(),
                               ],
                             ),
                           ),

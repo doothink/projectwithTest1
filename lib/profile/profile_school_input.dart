@@ -57,14 +57,20 @@ class _ProfileSchoolInputState extends State<ProfileSchoolInput> {
     super.initState();
 
     if (_schoolHistory != null) {
-      if (_schoolHistory.schoolPeriod.isNotEmpty) {
-        _dateController.text = _schoolHistory.schoolPeriod;
+      if (_schoolHistory.schoolPeriod != null) {
+        if (_schoolHistory.schoolPeriod.isNotEmpty) {
+          _dateController.text = _schoolHistory.schoolPeriod;
+        }
       }
-      if (_schoolHistory.name.isNotEmpty) {
-        _nameController.text = _schoolHistory.name;
+      if (_schoolHistory.name != null) {
+        if (_schoolHistory.name.isNotEmpty) {
+          _nameController.text = _schoolHistory.name;
+        }
       }
-      if (_schoolHistory.position.isNotEmpty) {
-        _positionController.text = _schoolHistory.position;
+      if (_schoolHistory.position != null) {
+        if (_schoolHistory.position.isNotEmpty) {
+          _positionController.text = _schoolHistory.position;
+        }
       }
     }
   }

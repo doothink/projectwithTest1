@@ -1,16 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:with_flutter/authentication_bloc/bloc.dart';
-import 'package:with_flutter/common/date_util.dart';
-import 'package:with_flutter/common/empty.dart';
 import 'package:with_flutter/feed/feed_card.dart';
-import 'package:with_flutter/feeddetail/bloc/bloc.dart';
-import 'package:with_flutter/feeddetail/feed_detail_top_banner.dart';
-import 'package:with_flutter/model/feed.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import 'bloc_recommand/bloc.dart';
 
@@ -34,7 +27,7 @@ class _FeedRecommandState extends State<FeedRecommand> {
 
     _feedRecommandBloc = FeedRecommandBloc(
         authenticationBloc: BlocProvider.of<AuthenticationBloc>(context));
-    _feedRecommandBloc.add(FeedRecommandLoad(size: 4));
+    _feedRecommandBloc.add(FeedRecommandLoad(size: 8));
   }
 
   @override
