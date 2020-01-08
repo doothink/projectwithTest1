@@ -35,6 +35,10 @@ class _JobInfoHeartMainState extends State<JobInfoHeartMain> {
 
   @override
   Widget build(BuildContext context) {
+
+    double cardWidth = MediaQuery.of(context).size.width / 2;
+    double cardHeight = MediaQuery.of(context).size.height / 4;
+
     return BlocListener<JobInfoHeartBloc, JobInfoHeartState>(
       listener: (context, state) {
         if (state.isLoaded) {
@@ -56,6 +60,7 @@ class _JobInfoHeartMainState extends State<JobInfoHeartMain> {
                     mainAxisSpacing: 4,
                     crossAxisSpacing: 4,
                     crossAxisCount: 2,
+                    childAspectRatio: cardWidth / cardHeight,
 
                     children: List.generate(
                       _jobInfoHearts != null
@@ -66,7 +71,9 @@ class _JobInfoHeartMainState extends State<JobInfoHeartMain> {
                       (index) => index >= _jobInfoHearts.length
                           ? BottomLoader()
                           : SearchResultJobInfoCard(
-                              jobInfo: _jobInfoHearts[index].jobInfo,
+                        cardHeight: cardHeight,
+
+                        jobInfo: _jobInfoHearts[index].jobInfo,
                             ),
                     ),
 //
