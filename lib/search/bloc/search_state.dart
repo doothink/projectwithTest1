@@ -60,7 +60,7 @@ class SearchState {
 
   SearchState loaed(String searchValue) {
     return copyWith(
-      isLoaded: false,
+      isLoaded: true,
       isLoading: false,
       status: 2,
       searchValue: searchValue,

@@ -44,8 +44,8 @@ class Profile extends Equatable {
   final String afterClub;
   final String movedAt;
   final String contractEndAt;
-  final String transferFee;
-  final String salary;
+  final double transferFee;
+  final double salary;
 
   final int agentNetwork;
   final int agentLanguage;

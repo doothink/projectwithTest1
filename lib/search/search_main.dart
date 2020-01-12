@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:with_flutter/authentication_bloc/authentication.dart';
 import 'package:with_flutter/common/empty.dart';
 import 'package:with_flutter/search/search_default.dart';
 import 'package:with_flutter/searchresult/search.dart';
+import 'package:with_flutter/searchtotal/bloc/search_total_bloc.dart';
+import 'package:with_flutter/searchtotal/bloc/search_total_event.dart';
 import 'package:with_flutter/searchtotal/search_total_screen.dart';
 
 import 'bloc/bloc.dart';
@@ -19,12 +22,15 @@ class SearchMain extends StatefulWidget {
 
 class _SearchMainState extends State<SearchMain> {
   SearchBloc _searchBloc;
+  SearchTotalBloc _searchTotalBloc;
 
   @override
   void initState() {
     super.initState();
 
     _searchBloc = BlocProvider.of<SearchBloc>(context);
+    _searchTotalBloc = SearchTotalBloc(
+        authenticationBloc: BlocProvider.of<AuthenticationBloc>(context));
   }
 
   String _searchValue;
@@ -35,9 +41,12 @@ class _SearchMainState extends State<SearchMain> {
     return BlocListener<SearchBloc, SearchState>(
       listener: (context, state) {
         if (state.isLoaded) {
-          debugPrint("]-----] state.isLoaded [-----[");
+          debugPrint("]-----] state.searchValue [-----[ ${state.searchValue}");
+          debugPrint("]-----] _searchTotalBloc [-----[ ${_searchTotalBloc}");
+          _searchValue = state.searchValue;
+          _searchTotalBloc.add(SearchTotalLoad(searchValue: state.searchValue));
+//          debugPrint("]-----] state.isLoaded [-----[");
         }
-        debugPrint("]-----] state.isLoaded [-----[ ${state.status}");
       },
       child: BlocBuilder<SearchBloc, SearchState>(
         builder: (context, state) {
@@ -49,6 +58,7 @@ class _SearchMainState extends State<SearchMain> {
               searchValue: state.searchValue != null ? state.searchValue : "",
             ),
             SearchTotalScreen(
+              searchTotalBloc: _searchTotalBloc,
               searchValue: state.searchValue != null ? state.searchValue : "",
             ),
           ];

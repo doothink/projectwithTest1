@@ -29,7 +29,8 @@ class ProfilePlayerHistory extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     Text(
-                      _playerHistory.playYear.isNotEmpty
+                      _playerHistory.playYear != null &&
+                              _playerHistory.playYear.isNotEmpty
                           ? _playerHistory.playYear
                           : "",
                       style: TextStyle(
@@ -58,7 +59,8 @@ class ProfilePlayerHistory extends StatelessWidget {
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Text(
-                          _playerHistory.leagueName.isNotEmpty
+                          _playerHistory.leagueName != null &&
+                                  _playerHistory.leagueName.isNotEmpty
                               ? _playerHistory.leagueName
                               : "",
                           style: TextStyle(

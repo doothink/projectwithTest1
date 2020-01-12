@@ -46,11 +46,15 @@ class _InjuaryHistoryViewState extends State<InjuaryHistoryView> {
     super.initState();
 
     if (_injuaryHistory != null) {
-      if (_injuaryHistory.injuredYear.isNotEmpty) {
-        _yearController.text = _injuaryHistory.injuredYear;
+      if (_injuaryHistory.injuredYear != null) {
+        if (_injuaryHistory.injuredYear.isNotEmpty) {
+          _yearController.text = _injuaryHistory.injuredYear;
+        }
       }
-      if (_injuaryHistory.content.isNotEmpty) {
-        _contentController.text = _injuaryHistory.content;
+      if (_injuaryHistory.content != null) {
+        if (_injuaryHistory.content.isNotEmpty) {
+          _contentController.text = _injuaryHistory.content;
+        }
       }
     }
   }

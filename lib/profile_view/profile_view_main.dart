@@ -9,7 +9,7 @@ import 'package:with_flutter/model/injuaryHistory.dart';
 import 'package:with_flutter/model/playerHistory.dart';
 import 'package:with_flutter/model/profile.dart';
 import 'package:with_flutter/model/schoolHistory.dart';
-import 'package:with_flutter/profile/profile_radio_slider.dart';
+import 'package:with_flutter/profile/profile_playerhistory.dart';
 import 'package:with_flutter/profile_view/profile_injuaryhistory_view.dart';
 import 'package:with_flutter/profile_view/profile_school_view.dart';
 import 'package:with_flutter/profile_view/profile_view_radio_slider.dart';
@@ -43,7 +43,7 @@ class _ProfileViewMainState extends State<ProfileViewMain> {
 
   String _imageNetwork;
 
-  TextEditingController _nickNameController = TextEditingController();
+//  TextEditingController _nickNameController = TextEditingController();
   TextEditingController _realNameController = TextEditingController();
   TextEditingController _countryController = new TextEditingController();
 
@@ -157,8 +157,8 @@ class _ProfileViewMainState extends State<ProfileViewMain> {
                 _imageNetwork = state.profile.mediaCollections[0].fullPathS3;
               }
             }
-            _nickNameController.text =
-                StringUtils.defaultNull(state.profile.nickName);
+//            _nickNameController.text =
+//                StringUtils.defaultNull(state.profile.nickName);
             _realNameController.text =
                 StringUtils.defaultNull(state.profile.realName);
             _countryController.text = state.profile.country;
@@ -205,8 +205,8 @@ class _ProfileViewMainState extends State<ProfileViewMain> {
             _afterClubController.text = state.profile.afterClub;
             _movedAtController.text = state.profile.movedAt;
             _contractEndAtController.text = state.profile.contractEndAt;
-            _transferFeeController.text = state.profile.transferFee;
-            _salaryController.text = state.profile.salary;
+            _transferFeeController.text = state.profile.transferFee.toString();
+            _salaryController.text = state.profile.salary.toString();
 
             if (state.profile.memberSchools != null) {
               if (state.profile.memberSchools.length > 0) {
@@ -252,72 +252,71 @@ class _ProfileViewMainState extends State<ProfileViewMain> {
                       child: Column(
                         children: <Widget>[
                           Container(
+                            margin: EdgeInsets.only(top: 19),
                             width: MediaQuery.of(context).size.width,
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
-                                Stack(children: [
-                                  CircleAvatar(
-                                    radius: 42.5,
-                                    child: ClipOval(
-                                      child: _imageNetwork != null
-                                          ? CachedNetworkImage(
-                                              width: 85.0,
-                                              height: 85.0,
-                                              imageUrl: _imageNetwork,
-                                              fit: BoxFit.cover,
-                                              placeholder: (context, url) =>
-                                                  new CircularProgressIndicator(),
-                                              errorWidget:
-                                                  (context, url, error) =>
-                                                      new Icon(Icons.error),
-                                            )
-                                          : Image.asset(
-                                              'assets/images/nophoto@3x.png',
-                                              width: 85.0,
-                                              height: 85.0,
-                                              fit: BoxFit.cover,
-                                            ),
-                                    ),
+                                CircleAvatar(
+                                  radius: 45.0,
+                                  backgroundColor:
+                                      Color.fromRGBO(226, 226, 226, 1),
+                                  child: ClipOval(
+                                    child: _imageNetwork != null
+                                        ? CachedNetworkImage(
+                                            width: 85.0,
+                                            height: 85.0,
+                                            imageUrl: _imageNetwork,
+                                            fit: BoxFit.cover,
+                                            placeholder: (context, url) =>
+                                                new CircularProgressIndicator(),
+                                            errorWidget:
+                                                (context, url, error) =>
+                                                    new Icon(Icons.error),
+                                          )
+                                        : Image.asset(
+                                            'assets/images/nophoto@3x.png',
+                                            width: 85.0,
+                                            height: 85.0,
+                                            fit: BoxFit.cover,
+                                          ),
                                   ),
-                                ]),
+                                ),
                                 Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.55,
-                                  margin: EdgeInsets.only(left: 17.0),
+//                                  margin: EdgeInsets.only(left: 17.0),
                                   child: Column(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
-                                      TextFormField(
-                                        enabled: false,
-                                        controller: _nickNameController,
-                                        decoration: InputDecoration(
-                                          contentPadding: const EdgeInsets.only(
-                                              bottom: -10),
-                                          hintText: '닉네임',
-                                          hintStyle: TextStyle(
-                                            fontSize: 20,
-                                            color: const Color.fromRGBO(
-                                                222, 222, 222, 1),
-                                          ),
-                                        ),
-                                      ),
-                                      TextFormField(
-                                        enabled: false,
-                                        controller: _realNameController,
-                                        decoration: InputDecoration(
-                                          contentPadding: const EdgeInsets.only(
-                                              bottom: -10),
-                                          hintText: '이름',
-                                          hintStyle: TextStyle(
-                                            fontSize: 13,
-                                            color: const Color.fromRGBO(
-                                                222, 222, 222, 1),
-                                          ),
-                                        ),
-                                      ),
+                                      state.profile.nickName != null
+                                          ? Text(
+                                              "${state.profile.nickName}",
+                                              style: TextStyle(
+                                                color: Color.fromRGBO(
+                                                    88, 88, 88, 1),
+                                                fontWeight: FontWeight.w400,
+                                                fontFamily:
+                                                    "NotoSansCJKkr-Bold",
+                                                fontStyle: FontStyle.normal,
+                                                fontSize: 20.0,
+                                              ),
+                                            )
+                                          : EmptyWidget(),
+                                      state.profile.realName != null
+                                          ? Text(
+                                              "${state.profile.realName}",
+                                              style: TextStyle(
+                                                color: Color.fromRGBO(
+                                                    88, 88, 88, 1),
+                                                fontWeight: FontWeight.w400,
+                                                fontFamily:
+                                                    "NotoSansCJKkr-Medium",
+                                                fontStyle: FontStyle.normal,
+                                                fontSize: 16.0,
+                                              ),
+                                            )
+                                          : EmptyWidget(),
                                     ],
                                   ),
                                 ),
@@ -328,140 +327,146 @@ class _ProfileViewMainState extends State<ProfileViewMain> {
                             margin: EdgeInsets.only(top: 26.5),
                             child: Column(
                               children: <Widget>[
-                                Container(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text(
-                                        "국가",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w400,
-                                          fontFamily: "NotoSansCJKkr-Bold",
-                                          fontStyle: FontStyle.normal,
-                                          fontSize: 15.0,
-                                        ),
-                                      ),
-                                      TextFormField(
-                                        enabled: false,
-                                        controller: _countryController,
-                                        decoration: InputDecoration(
-                                          contentPadding: const EdgeInsets.only(
-                                              bottom: -10),
-                                          hintText: '국가입력',
-                                          hintStyle: TextStyle(
-                                            fontSize: 16,
-                                            color: const Color.fromRGBO(
-                                                222, 222, 222, 1),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 30),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text(
-                                        "성별",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w400,
-                                          fontFamily: "NotoSansCJKkr-Bold",
-                                          fontStyle: FontStyle.normal,
-                                          fontSize: 15.0,
-                                        ),
-                                      ),
-                                      FormField<String>(
-                                        enabled: false,
-                                        builder:
-                                            (FormFieldState<String> state) {
-                                          return InputDecorator(
-                                            textAlign: TextAlign.center,
-                                            decoration: InputDecoration(
-                                              contentPadding:
-                                                  const EdgeInsets.only(
-                                                      bottom: -10),
-//                                        enabledBorder: UnderlineInputBorder(
-//                                            borderSide: BorderSide(
-//                                                color: Colors.white)),
-//                                        focusedBorder: UnderlineInputBorder(
-//                                          borderSide:
-//                                              BorderSide(color: Colors.white),
-//                                        ),
-//                                        errorBorder: UnderlineInputBorder(
-//                                          borderSide:
-//                                              BorderSide(color: Colors.white),
-//                                        ),
-                                              errorText: state.hasError
-                                                  ? state.errorText
-                                                  : null,
-                                            ),
-                                            child: DropdownButtonHideUnderline(
-                                              child:
-                                                  DropdownButton<GenderSelect>(
-                                                value: null,
-                                                iconSize: 0,
-                                                isExpanded: true,
-                                                isDense: true,
-                                                hint: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: <Widget>[
-                                                    Text(
-                                                      _gender.title,
-                                                      style: TextStyle(
-                                                        color: _gender.value !=
-                                                                null
-                                                            ? Colors.black
-                                                            : Color.fromRGBO(
-                                                                222,
-                                                                222,
-                                                                222,
-                                                                1),
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        fontFamily:
-                                                            "NotoSansCJKkr-Medium",
-                                                        fontStyle:
-                                                            FontStyle.normal,
-                                                        fontSize: 16.0,
-                                                      ),
-                                                    ),
-                                                    Icon(
-                                                      FontAwesomeIcons
-                                                          .caretDown,
-                                                      color: Color.fromRGBO(
-                                                          0, 166, 219, 1),
-                                                      size: 20,
-                                                    ),
-                                                  ],
-                                                ),
-                                                items: _selectGender
-                                                    .map((GenderSelect item) {
-                                                  return DropdownMenuItem<
-                                                      GenderSelect>(
-                                                    value: item,
-                                                    child: new Text(
-                                                      item.title,
-                                                      style: new TextStyle(
-                                                          color: Colors.black),
-                                                    ),
-                                                  );
-                                                }).toList(),
+                                _countryController.text != null
+                                    ? Container(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text(
+                                              "국가",
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w400,
+                                                fontFamily:
+                                                    "NotoSansCJKkr-Bold",
+                                                fontStyle: FontStyle.normal,
+                                                fontSize: 15.0,
                                               ),
                                             ),
-                                          );
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                            TextFormField(
+                                              enabled: false,
+                                              controller: _countryController,
+                                              decoration: InputDecoration(
+                                                contentPadding:
+                                                    const EdgeInsets.only(
+                                                        bottom: -10),
+                                                hintText: '국가입력',
+                                                hintStyle: TextStyle(
+                                                  fontSize: 16,
+                                                  color: const Color.fromRGBO(
+                                                      222, 222, 222, 1),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    : EmptyWidget(),
+                                _gender.value != null
+                                    ? Container(
+                                        margin: EdgeInsets.only(top: 30),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text(
+                                              "성별",
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w400,
+                                                fontFamily:
+                                                    "NotoSansCJKkr-Bold",
+                                                fontStyle: FontStyle.normal,
+                                                fontSize: 15.0,
+                                              ),
+                                            ),
+                                            FormField<String>(
+                                              enabled: false,
+                                              builder: (FormFieldState<String>
+                                                  state) {
+                                                return InputDecorator(
+                                                  textAlign: TextAlign.center,
+                                                  decoration: InputDecoration(
+                                                    contentPadding:
+                                                        const EdgeInsets.only(
+                                                            bottom: -10),
+                                                    errorText: state.hasError
+                                                        ? state.errorText
+                                                        : null,
+                                                  ),
+                                                  child:
+                                                      DropdownButtonHideUnderline(
+                                                    child: DropdownButton<
+                                                        GenderSelect>(
+                                                      value: null,
+                                                      iconSize: 0,
+                                                      isExpanded: true,
+                                                      isDense: true,
+                                                      hint: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: <Widget>[
+                                                          Text(
+                                                            _gender.title,
+                                                            style: TextStyle(
+                                                              color: _gender
+                                                                          .value !=
+                                                                      null
+                                                                  ? Colors.black
+                                                                  : Color
+                                                                      .fromRGBO(
+                                                                          222,
+                                                                          222,
+                                                                          222,
+                                                                          1),
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              fontFamily:
+                                                                  "NotoSansCJKkr-Medium",
+                                                              fontStyle:
+                                                                  FontStyle
+                                                                      .normal,
+                                                              fontSize: 16.0,
+                                                            ),
+                                                          ),
+                                                          Icon(
+                                                            FontAwesomeIcons
+                                                                .caretDown,
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    0,
+                                                                    166,
+                                                                    219,
+                                                                    1),
+                                                            size: 20,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      items: _selectGender.map(
+                                                          (GenderSelect item) {
+                                                        return DropdownMenuItem<
+                                                            GenderSelect>(
+                                                          value: item,
+                                                          child: new Text(
+                                                            item.title,
+                                                            style: new TextStyle(
+                                                                color: Colors
+                                                                    .black),
+                                                          ),
+                                                        );
+                                                      }).toList(),
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    : EmptyWidget(),
                                 Container(
                                   margin: EdgeInsets.only(top: 30),
                                   child: Column(
@@ -497,39 +502,45 @@ class _ProfileViewMainState extends State<ProfileViewMain> {
                                     ],
                                   ),
                                 ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 30),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text(
-                                        "좋아하는 브랜드",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w400,
-                                          fontFamily: "NotoSansCJKkr-Bold",
-                                          fontStyle: FontStyle.normal,
-                                          fontSize: 15.0,
+                                _favoriteBrandController.text != null &&
+                                        _favoriteBrandController.text.isNotEmpty
+                                    ? Container(
+                                        margin: EdgeInsets.only(top: 30),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text(
+                                              "좋아하는 브랜드",
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w400,
+                                                fontFamily:
+                                                    "NotoSansCJKkr-Bold",
+                                                fontStyle: FontStyle.normal,
+                                                fontSize: 15.0,
+                                              ),
+                                            ),
+                                            TextFormField(
+                                              enabled: false,
+                                              controller:
+                                                  _favoriteBrandController,
+                                              decoration: InputDecoration(
+                                                contentPadding:
+                                                    const EdgeInsets.only(
+                                                        bottom: -10),
+                                                hintText: '나이키',
+                                                hintStyle: TextStyle(
+                                                  fontSize: 16,
+                                                  color: const Color.fromRGBO(
+                                                      222, 222, 222, 1),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ),
-                                      TextFormField(
-                                        enabled: false,
-                                        controller: _favoriteBrandController,
-                                        decoration: InputDecoration(
-                                          contentPadding: const EdgeInsets.only(
-                                              bottom: -10),
-                                          hintText: '나이키',
-                                          hintStyle: TextStyle(
-                                            fontSize: 16,
-                                            color: const Color.fromRGBO(
-                                                222, 222, 222, 1),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                      )
+                                    : EmptyWidget(),
                                 Container(
                                   margin: EdgeInsets.only(top: 30),
                                   child: Column(
@@ -633,16 +644,16 @@ class _ProfileViewMainState extends State<ProfileViewMain> {
                                   margin: EdgeInsets.only(top: 30),
                                   child: Column(
                                     children: <Widget>[
-                                      Text(
-                                        "선수 정보 입력",
-                                        style: const TextStyle(
-                                            color:
-                                                Color.fromRGBO(0, 166, 219, 1),
-                                            fontWeight: FontWeight.w400,
-                                            fontFamily: "NotoSansCJKkr-Bold",
-                                            fontStyle: FontStyle.normal,
-                                            fontSize: 18.0),
-                                      ),
+//                                      Text(
+//                                        "선수 정보 입력",
+//                                        style: const TextStyle(
+//                                            color:
+//                                                Color.fromRGBO(0, 166, 219, 1),
+//                                            fontWeight: FontWeight.w400,
+//                                            fontFamily: "NotoSansCJKkr-Bold",
+//                                            fontStyle: FontStyle.normal,
+//                                            fontSize: 18.0),
+//                                      ),
                                       Container(
                                         margin: EdgeInsets.only(top: 25.5),
                                         alignment: Alignment.centerLeft,
@@ -1174,11 +1185,6 @@ class _ProfileViewMainState extends State<ProfileViewMain> {
                                                     fontSize: 15.0,
                                                   ),
                                                 ),
-                                                Icon(
-                                                  Icons.add,
-                                                  color: Color.fromRGBO(
-                                                      0, 166, 219, 1),
-                                                )
                                               ],
                                             ),
                                             Column(
@@ -1190,6 +1196,432 @@ class _ProfileViewMainState extends State<ProfileViewMain> {
                                         ),
                                       )
                                     : EmptyWidget(),
+                                Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  margin: EdgeInsets.only(top: 30),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        "병역구분",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: "NotoSansCJKkr-Bold",
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 15.0,
+                                        ),
+                                      ),
+                                      FormField<String>(
+                                        builder:
+                                            (FormFieldState<String> state) {
+                                          return InputDecorator(
+                                            textAlign: TextAlign.center,
+                                            decoration: InputDecoration(
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      bottom: -10),
+//                                  enabledBorder: UnderlineInputBorder(
+//                                      borderSide:
+//                                          BorderSide(color: Colors.white)),
+//                                  focusedBorder: UnderlineInputBorder(
+//                                    borderSide: BorderSide(color: Colors.white),
+//                                  ),
+//                                  errorBorder: UnderlineInputBorder(
+//                                    borderSide: BorderSide(color: Colors.white),
+//                                  ),
+                                              errorText: state.hasError
+                                                  ? state.errorText
+                                                  : null,
+                                            ),
+                                            child: DropdownButtonHideUnderline(
+                                              child:
+                                                  DropdownButton<ArmyDivSelect>(
+                                                value: null,
+                                                iconSize: 0,
+                                                isExpanded: true,
+                                                isDense: true,
+                                                hint: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: <Widget>[
+                                                    Text(
+                                                      _armyDiv.title,
+                                                      style: TextStyle(
+                                                        color: _armyDiv.value !=
+                                                                null
+                                                            ? Colors.black
+                                                            : Color.fromRGBO(
+                                                                222,
+                                                                222,
+                                                                222,
+                                                                1),
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontFamily:
+                                                            "NotoSansCJKkr-Medium",
+                                                        fontStyle:
+                                                            FontStyle.normal,
+                                                        fontSize: 16.0,
+                                                      ),
+                                                    ),
+                                                    Icon(
+                                                      FontAwesomeIcons
+                                                          .caretDown,
+                                                      color: Color.fromRGBO(
+                                                          0, 166, 219, 1),
+                                                      size: 20,
+                                                    ),
+                                                  ],
+                                                ),
+//
+                                                items: _selectArmyDiv
+                                                    .map((ArmyDivSelect item) {
+                                                  return DropdownMenuItem<
+                                                      ArmyDivSelect>(
+                                                    value: item,
+                                                    child: new Text(
+                                                      item.title,
+                                                      style: new TextStyle(
+                                                          color: Colors.black),
+                                                    ),
+                                                  );
+                                                }).toList(),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 30),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        "미필 or 면제 사유",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: "NotoSansCJKkr-Bold",
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 15.0,
+                                        ),
+                                      ),
+                                      TextFormField(
+                                        maxLength: 200,
+                                        controller: _armyReasonController,
+                                        maxLines: 1,
+                                        decoration: InputDecoration(
+                                          contentPadding: const EdgeInsets.only(
+                                              bottom: -10),
+                                          hintText: "미필 or 면제 사유",
+                                          hintStyle: TextStyle(
+                                            fontSize: 16,
+                                            color: const Color.fromRGBO(
+                                                222, 222, 222, 1),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                _playerHistoryList != null &&
+                                        _playerHistoryList.length > 0
+                                    ? Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        margin: EdgeInsets.only(top: 30),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: <Widget>[
+                                                Text(
+                                                  "출전 경기 히스토리",
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.w400,
+                                                    fontFamily:
+                                                        "NotoSansCJKkr-Bold",
+                                                    fontStyle: FontStyle.normal,
+                                                    fontSize: 15.0,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            _playerHistoryList.length > 0
+                                                ? Container(
+                                                    child: Column(
+                                                        children:
+                                                            _playerHistoryList.map(
+                                                                (playHistory) {
+                                                      return ProfilePlayerHistory(
+                                                        playerHistory:
+                                                            playHistory,
+                                                      );
+                                                    }).toList()),
+                                                  )
+                                                : EmptyWidget(),
+                                          ],
+                                        ),
+                                      )
+                                    : EmptyWidget(),
+                                _injuaryHistoryList != null &&
+                                        _injuaryHistoryList.length > 0
+                                    ? Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        margin: EdgeInsets.only(top: 30),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: <Widget>[
+                                                Text(
+                                                  "부상 히스토리",
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.w400,
+                                                    fontFamily:
+                                                        "NotoSansCJKkr-Bold",
+                                                    fontStyle: FontStyle.normal,
+                                                    fontSize: 15.0,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            _injuaryHistoryList != null &&
+                                                    _injuaryHistoryList.length >
+                                                        0
+                                                ? Column(
+                                                    children:
+                                                        _injuaryHistoryList
+                                                            .map((item) {
+                                                      return item
+                                                          .injuaryHistoryView;
+                                                    }).toList(),
+                                                  )
+                                                : Text(""),
+                                          ],
+                                        ),
+                                      )
+                                    : EmptyWidget(),
+                                Container(
+                                  margin: EdgeInsets.only(top: 30),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        "이적 전 팀",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: "NotoSansCJKkr-Bold",
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 15.0,
+                                        ),
+                                      ),
+                                      TextFormField(
+                                        enabled: false,
+                                        controller: _beforeClubController,
+                                        decoration: InputDecoration(
+                                          contentPadding: const EdgeInsets.only(
+                                              bottom: -10),
+                                          hintText: '울산현대',
+                                          hintStyle: TextStyle(
+                                            fontSize: 16,
+                                            color: const Color.fromRGBO(
+                                                222, 222, 222, 1),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 30),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        "이적 후 팀",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: "NotoSansCJKkr-Bold",
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 15.0,
+                                        ),
+                                      ),
+                                      TextFormField(
+                                        enabled: false,
+                                        controller: _afterClubController,
+                                        decoration: InputDecoration(
+                                          contentPadding: const EdgeInsets.only(
+                                              bottom: -10),
+                                          hintText: '이적 후 팀',
+                                          hintStyle: TextStyle(
+                                            fontSize: 16,
+                                            color: const Color.fromRGBO(
+                                                222, 222, 222, 1),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 30),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        "이적한 날짜",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: "NotoSansCJKkr-Bold",
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 15.0,
+                                        ),
+                                      ),
+                                      TextFormField(
+                                        enabled: false,
+                                        controller: _movedAtController,
+                                        keyboardType: TextInputType.phone,
+                                        decoration: InputDecoration(
+                                          contentPadding: const EdgeInsets.only(
+                                              bottom: -10),
+                                          hintText: 'yyyy.mm.dd',
+                                          hintStyle: TextStyle(
+                                            fontSize: 16,
+                                            color: const Color.fromRGBO(
+                                                222, 222, 222, 1),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 30),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        "계약 마감일",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: "NotoSansCJKkr-Bold",
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 15.0,
+                                        ),
+                                      ),
+                                      TextFormField(
+                                        enabled: false,
+                                        controller: _contractEndAtController,
+                                        keyboardType: TextInputType.phone,
+                                        decoration: InputDecoration(
+                                          contentPadding: const EdgeInsets.only(
+                                              bottom: -10),
+                                          hintText: 'yyyy.mm.dd',
+                                          hintStyle: TextStyle(
+                                            fontSize: 16,
+                                            color: const Color.fromRGBO(
+                                                222, 222, 222, 1),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 30),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        "이적료",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: "NotoSansCJKkr-Bold",
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 15.0,
+                                        ),
+                                      ),
+                                      TextFormField(
+                                        enabled: false,
+                                        controller: _transferFeeController,
+                                        keyboardType: TextInputType.phone,
+                                        decoration: InputDecoration(
+                                          contentPadding: const EdgeInsets.only(
+                                              bottom: -10),
+                                          hintText: '이적료',
+                                          hintStyle: TextStyle(
+                                            fontSize: 16,
+                                            color: const Color.fromRGBO(
+                                                222, 222, 222, 1),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 30),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        "내가 받는 연봉",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: "NotoSansCJKkr-Bold",
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 15.0,
+                                        ),
+                                      ),
+                                      TextFormField(
+                                        enabled: false,
+                                        controller: _salaryController,
+                                        keyboardType: TextInputType.number,
+                                        decoration: InputDecoration(
+                                          contentPadding: const EdgeInsets.only(
+                                              bottom: -10),
+                                          hintText: '내가 받는 연봉',
+                                          hintStyle: TextStyle(
+                                            fontSize: 16,
+                                            color: const Color.fromRGBO(
+                                                222, 222, 222, 1),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
                           ),

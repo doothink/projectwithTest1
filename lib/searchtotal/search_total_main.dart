@@ -34,7 +34,7 @@ class _SearchTotalMainState extends State<SearchTotalMain> {
 
     _searchBloc = BlocProvider.of<SearchTotalBloc>(context);
     debugPrint("]-----] state._searchValue [-----[ $_searchValue");
-    _searchBloc.add(SearchTotalLoad(searchValue: _searchValue));
+//    _searchBloc.add(SearchTotalLoad(searchValue: _searchValue));
 //    _searchValueCurrent = _searchValue;
   }
 
@@ -42,9 +42,15 @@ class _SearchTotalMainState extends State<SearchTotalMain> {
 
   @override
   Widget build(BuildContext context) {
+    double cardWidth = MediaQuery.of(context).size.width / 2;
+    double cardHeight = MediaQuery.of(context).size.height / 3.6;
+
     return BlocListener<SearchTotalBloc, SearchTotalState>(
       listener: (context, state) {
-        if (state.isLoaded) {}
+        debugPrint("]-----] SearchTotalMain.state [-----[ ${state}");
+        if (state.isLoaded) {
+          debugPrint("]-----] build._searchValue [-----[ $_searchValue");
+        }
       },
       child: BlocBuilder<SearchTotalBloc, SearchTotalState>(
         builder: (context, state) {
@@ -330,10 +336,11 @@ class _SearchTotalMainState extends State<SearchTotalMain> {
                                 mainAxisSpacing: 4,
                                 crossAxisSpacing: 4,
                                 crossAxisCount: 2,
-//                                childAspectRatio: 0.9,
+                                childAspectRatio: cardWidth / cardHeight,
                                 children: List.generate(state.jobInfos.length,
                                     (index) {
                                   return SearchResultJobInfoCard(
+                                    cardHeight: cardHeight,
                                     jobInfo: state.jobInfos[index],
                                   );
                                 }),

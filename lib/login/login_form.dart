@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_kakao_login/flutter_kakao_login.dart';
 import 'package:with_flutter/authentication_bloc/bloc.dart';
-import 'package:with_flutter/home/home_screen.dart';
 import 'package:with_flutter/login/login.dart';
-import 'package:with_flutter/register/register.dart';
+import 'package:with_flutter/register/register_screen.dart';
 
 class LoginForm extends StatefulWidget {
   LoginForm({
@@ -33,6 +32,7 @@ class _LoginFormState extends State<LoginForm> {
   void initState() {
     super.initState();
     _loginBloc = BlocProvider.of<LoginBloc>(context);
+//    _emailController.addListener(_onEmailChanged);
   }
 
   @override
@@ -46,11 +46,14 @@ class _LoginFormState extends State<LoginForm> {
               SnackBar(
                 content: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [Row(
-                    children: <Widget>[
-                      Text(state.failureMessage),
-                    ],
-                  ), Icon(Icons.error)],
+                  children: [
+                    Row(
+                      children: <Widget>[
+                        Text(state.failureMessage),
+                      ],
+                    ),
+                    Icon(Icons.error)
+                  ],
                 ),
                 backgroundColor: Colors.red,
               ),
@@ -340,11 +343,12 @@ class _LoginFormState extends State<LoginForm> {
     super.dispose();
   }
 
-//  void _onEmailChanged() {
-//    _loginBloc.add(
-//      EmailChanged(email: _emailController.text),
-//    );
-//  }
+  void _onEmailChanged() {
+    _loginBloc.add(
+      EmailChanged(email: _emailController.text),
+    );
+  }
+
 //
 //  void _onPasswordChanged() {
 //    _loginBloc.add(

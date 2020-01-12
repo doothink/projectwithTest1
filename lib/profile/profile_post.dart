@@ -138,6 +138,7 @@ class _ProfilePostState extends State<ProfilePost> {
   var _contractEndAtFormatter = new MaskTextInputFormatter(
       mask: '####.##.##', filter: {"#": RegExp(r'[0-9]')});
   TextEditingController _transferFeeController = new TextEditingController();
+
   TextEditingController _salaryController = new TextEditingController();
 
   int _agentNetwork;
@@ -358,8 +359,8 @@ class _ProfilePostState extends State<ProfilePost> {
             _afterClubController.text = state.profile.afterClub;
             _movedAtController.text = state.profile.movedAt;
             _contractEndAtController.text = state.profile.contractEndAt;
-            _transferFeeController.text = state.profile.transferFee;
-            _salaryController.text = state.profile.salary;
+            _transferFeeController.text = state.profile.transferFee.toString();
+            _salaryController.text = state.profile.salary.toString();
 
             if (state.profile.memberSchools != null) {
               if (state.profile.memberSchools.length > 0) {
@@ -1747,7 +1748,7 @@ class _ProfilePostState extends State<ProfilePost> {
                             WhitelistingTextInputFormatter.digitsOnly,
                           ],
                           controller: _salaryController,
-                          keyboardType: TextInputType.phone,
+                          keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             contentPadding: const EdgeInsets.only(bottom: -10),
                             hintText: '내가 받는 연봉',
@@ -1843,8 +1844,12 @@ class _ProfilePostState extends State<ProfilePost> {
       afterClub: _afterClubController.text,
       movedAt: _movedAtController.text,
       contractEndAt: _contractEndAtController.text,
-      transferFee: _transferFeeController.text,
-      salary: _salaryController.text,
+      transferFee: _transferFeeController.text != null
+          ? double.tryParse(_transferFeeController.text)
+          : null,
+      salary: _salaryController.text != null
+          ? double.tryParse(_salaryController.text)
+          : null,
       memberSchools: schoolHistories,
       injuaryHistories: injuaryHistories,
       memberSchoolDelete: memberSchoolDelete,

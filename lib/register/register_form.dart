@@ -40,6 +40,7 @@ class _RegisterFormState extends State<RegisterForm> {
     _registerBloc = BlocProvider.of<RegisterBloc>(context);
     _loginBloc = LoginBloc(
         authenticationBloc: BlocProvider.of<AuthenticationBloc>(context));
+//    _emailController.addListener(_onEmailChanged);
   }
 
   @override
@@ -170,6 +171,7 @@ class _RegisterFormState extends State<RegisterForm> {
                       padding: const EdgeInsets.only(top: 40.0),
                       child: Container(
                         child: TextFormField(
+                          maxLength: 12,
                           controller: _nickNameController,
                           decoration: InputDecoration(
                             contentPadding: const EdgeInsets.only(bottom: 6.5),
@@ -346,6 +348,7 @@ class _RegisterFormState extends State<RegisterForm> {
     _passwordController.dispose();
     super.dispose();
   }
+
 
   final RegExp _emailRegExp = RegExp(
       r"^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)");

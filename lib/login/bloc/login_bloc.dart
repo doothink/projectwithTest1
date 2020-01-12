@@ -5,6 +5,7 @@ import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:with_flutter/authentication_bloc/authentication.dart';
 import 'package:with_flutter/login/login.dart';
+import 'package:with_flutter/validators.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthenticationBloc _authenticationBloc;
@@ -60,8 +61,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Stream<LoginState> _mapEmailChangedToState(String email) async* {
     yield state.update(
-//      isEmailValid: Validators.isValidEmail(email),
-        );
+      isEmailValid: Validators.isValidEmail(email),
+    );
   }
 
   Stream<LoginState> _mapPasswordChangedToState(String password) async* {

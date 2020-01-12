@@ -13,9 +13,9 @@ class AuthenticationBloc
   final UserRepository _userRepository;
   final http.Client _httpClient;
 
-//  final String apiUrl = API_URL_LOCAL;
+  final String apiUrl = API_URL_LOCAL;
 
-  final String apiUrl = API_URL_DEV;
+//  final String apiUrl = API_URL_DEV;
 
 //  final String apiUrl = API_URL_PROD;
 
@@ -115,7 +115,7 @@ class AuthenticationBloc
       });
 
 //      print(utf8.decode(response.bodyBytes));
-//      print(response.body);
+      print(response.body);
       if (response.statusCode == 200) {
 //        print(response.body);
         if (response.body != null) {
