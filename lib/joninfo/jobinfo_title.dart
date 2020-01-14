@@ -51,7 +51,7 @@ class _JobInfoTitleState extends State<JobInfoTitle> {
         }
       },
       child: BlocBuilder<JobInfoBloc, JobInfoState>(builder: (context, state) {
-        print("=============[ ${_jobInfo.isHearted}");
+//        print("=============[ ${_jobInfo.isHearted}");
 
         return Container(
           decoration: BoxDecoration(

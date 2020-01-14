@@ -67,6 +67,15 @@ class SearchState {
     );
   }
 
+  SearchState updateInit() {
+    return copyWith(
+      isLoaded: false,
+      isLoading: false,
+      status: 0,
+      searchValue: "",
+    );
+  }
+
   SearchState copyWith({
     bool isLoaded,
     bool isLoading,

@@ -42,9 +42,14 @@ class _SearchMainState extends State<SearchMain> {
       listener: (context, state) {
         if (state.isLoaded) {
           debugPrint("]-----] state.searchValue [-----[ ${state.searchValue}");
-          debugPrint("]-----] _searchTotalBloc [-----[ ${_searchTotalBloc}");
+//          debugPrint("]-----] _searchTotalBloc [-----[ ${_searchTotalBloc}");
           _searchValue = state.searchValue;
+          debugPrint("]-----] _searchTotalBloc [-----[ ${_searchTotalBloc}");
+//          if (_searchBloc != null) {
+//            _searchBloc.close();
+//          }
           _searchTotalBloc.add(SearchTotalLoad(searchValue: state.searchValue));
+
 //          debugPrint("]-----] state.isLoaded [-----[");
         }
       },
@@ -132,6 +137,11 @@ class _SearchMainState extends State<SearchMain> {
 
   @override
   void dispose() {
+//    _searchTotalBloc.close();
+    if (_searchBloc != null) {
+      _searchBloc.close();
+    }
+    _searchController.dispose();
     super.dispose();
   }
 
@@ -143,14 +153,17 @@ class _SearchMainState extends State<SearchMain> {
     _searchBloc.add(SearchHashtagLoad(searchValue: value, status: 1));
   }
 
-  _setDefault() {
+  _setDefault() async {
     print("]-----] _setDefault [-----[ call");
     Future.delayed(Duration(milliseconds: 50)).then((_) {
       _searchController.clear();
       FocusScope.of(context).unfocus();
     });
 
+    _searchTotalBloc.add(SearchTotalInit());
     _searchBloc.add(SearchInit());
+    _searchTotalBloc = SearchTotalBloc(
+        authenticationBloc: BlocProvider.of<AuthenticationBloc>(context));
   }
 
   _setSearchValue() {

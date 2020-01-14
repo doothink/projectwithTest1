@@ -36,8 +36,12 @@ class SearchTotalBloc extends Bloc<SearchTotalEvent, SearchTotalState> {
 
   @override
   Stream<SearchTotalState> mapEventToState(SearchTotalEvent event) async* {
+    print("]-----] mapEventToState [-----[ ${event}");
     if (event is SearchTotalLoad) {
       yield* _mapSearchTotalsLoadToState(event.searchValue);
+    } else if (event is SearchTotalInit) {
+
+      yield* _mapSearchTotalInitToState();
     }
   }
 
@@ -86,5 +90,9 @@ class SearchTotalBloc extends Bloc<SearchTotalEvent, SearchTotalState> {
         yield SearchTotalState.failure();
       }
     }
+  }
+
+  Stream<SearchTotalState> _mapSearchTotalInitToState() async* {
+    yield SearchTotalState.empty();
   }
 }

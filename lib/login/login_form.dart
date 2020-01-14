@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_kakao_login/flutter_kakao_login.dart';
 import 'package:with_flutter/authentication_bloc/bloc.dart';
+import 'package:with_flutter/common/empty.dart';
 import 'package:with_flutter/login/login.dart';
 import 'package:with_flutter/register/register_screen.dart';
+import 'dart:io';
 
 class LoginForm extends StatefulWidget {
   LoginForm({
@@ -266,68 +268,72 @@ class _LoginFormState extends State<LoginForm> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 18.0),
-                      child: Row(children: <Widget>[
-                        Expanded(
-                          child: Divider(
-                            color: Colors.white,
-                          ),
-                          flex: 4,
-                        ),
-                        Expanded(
-                            child: Text(
-                          "또는",
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w400,
-                              fontFamily: "NotoSansCJKkr-Medium",
-                              fontStyle: FontStyle.normal,
-                              fontSize: 13.0),
-                        )),
-                        Expanded(
-                            child: Divider(
-                              color: Colors.white,
+                    Platform.isAndroid
+                        ? Padding(
+                            padding: const EdgeInsets.only(top: 18.0),
+                            child: Row(children: <Widget>[
+                              Expanded(
+                                child: Divider(
+                                  color: Colors.white,
+                                ),
+                                flex: 4,
+                              ),
+                              Expanded(
+                                  child: Text(
+                                "또는",
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: "NotoSansCJKkr-Medium",
+                                    fontStyle: FontStyle.normal,
+                                    fontSize: 13.0),
+                              )),
+                              Expanded(
+                                  child: Divider(
+                                    color: Colors.white,
+                                  ),
+                                  flex: 4),
+                            ]),
+                          )
+                        : EmptyWidget(),
+                    Platform.isAndroid
+                        ? Padding(
+                            padding: const EdgeInsets.only(top: 18.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Image(
+                                  image: AssetImage(
+                                      'assets/images/icons/sns-fb@3x.png'),
+                                  height: 51.0,
+                                  width: 51.0,
+                                ),
+                                Image(
+                                  image: AssetImage(
+                                      'assets/images/icons/sns-nv@3x.png'),
+                                  height: 51.0,
+                                  width: 51.0,
+                                ),
+                                GestureDetector(
+                                  onTap: _login,
+                                  child: Image(
+                                    image: AssetImage(
+                                        'assets/images/icons/sns-kk@3x.png'),
+                                    height: 51.0,
+                                    width: 51.0,
+                                  ),
+                                ),
+                                Image(
+                                  image: AssetImage(
+                                      'assets/images/icons/sns-gg@3x.png'),
+                                  height: 51.0,
+                                  width: 51.0,
+                                ),
+                              ],
                             ),
-                            flex: 4),
-                      ]),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 18.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Image(
-                            image:
-                                AssetImage('assets/images/icons/sns-fb@3x.png'),
-                            height: 51.0,
-                            width: 51.0,
-                          ),
-                          Image(
-                            image:
-                                AssetImage('assets/images/icons/sns-nv@3x.png'),
-                            height: 51.0,
-                            width: 51.0,
-                          ),
-                          GestureDetector(
-                            onTap: _login,
-                            child: Image(
-                              image: AssetImage(
-                                  'assets/images/icons/sns-kk@3x.png'),
-                              height: 51.0,
-                              width: 51.0,
-                            ),
-                          ),
-                          Image(
-                            image:
-                                AssetImage('assets/images/icons/sns-gg@3x.png'),
-                            height: 51.0,
-                            width: 51.0,
-                          ),
-                        ],
-                      ),
-                    )
+                          )
+                        : EmptyWidget()
                   ],
                 )),
           );

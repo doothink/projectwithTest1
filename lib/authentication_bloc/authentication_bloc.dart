@@ -13,9 +13,9 @@ class AuthenticationBloc
   final UserRepository _userRepository;
   final http.Client _httpClient;
 
-  final String apiUrl = API_URL_LOCAL;
+//  final String apiUrl = API_URL_LOCAL;
 
-//  final String apiUrl = API_URL_DEV;
+  final String apiUrl = API_URL_DEV;
 
 //  final String apiUrl = API_URL_PROD;
 

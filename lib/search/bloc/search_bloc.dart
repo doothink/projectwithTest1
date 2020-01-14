@@ -46,6 +46,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   Stream<SearchState> _mapSearchInitToState() async* {
     print("]-----] _mapSearchInitToState [-----[ call");
     yield SearchState.empty();
+//    yield state.updateInit();
   }
 
   Stream<SearchState> _mapSearchsLoadToState() async* {

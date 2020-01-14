@@ -8,6 +8,11 @@ abstract class SearchTotalEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class SearchTotalInit extends SearchTotalEvent {
+  @override
+  String toString() => 'SearchTotalInit';
+}
+
 class SearchTotalLoad extends SearchTotalEvent {
   final String searchValue;
 

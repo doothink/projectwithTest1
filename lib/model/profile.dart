@@ -75,6 +75,7 @@ class Profile extends Equatable {
   final List<PlayerHistory> memberPlayerHistories;
   final List<MediaCollection> mediaCollections;
   final int isReward;
+  final bool isFollow;
 
   const Profile({
     this.id,
@@ -134,6 +135,7 @@ class Profile extends Equatable {
     this.memberPlayerHistories,
     this.mediaCollections,
     this.isReward,
+    this.isFollow,
   });
 
   factory Profile.fromJson(Map<String, dynamic> json) =>

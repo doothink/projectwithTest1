@@ -19,9 +19,11 @@ class SearchTotalState {
 
   factory SearchTotalState.empty() {
     return SearchTotalState(
-      isLoaded: false,
-      isLoading: false,
-    );
+        isLoaded: false,
+        isLoading: false,
+        jobInfos: null,
+        clubs: null,
+        members: null);
   }
 
   factory SearchTotalState.failure() {
