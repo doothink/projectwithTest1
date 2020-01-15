@@ -112,56 +112,66 @@ class _HomeScreenState extends State<HomeScreen> {
       ProfileScreen()
     ];
 
-    return Scaffold(
-      body: _children[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: home,
-            activeIcon: homeActive,
-            title: Text(
-              '홈',
-              style: TextStyle(fontSize: 12),
+    return WillPopScope(
+      onWillPop: () {
+        if (_selectedIndex > 0) {
+          setState(() {
+            _selectedIndex = 0;
+          });
+          return Future.value(false);
+        }
+      },
+      child: Scaffold(
+        body: _children[_selectedIndex],
+        bottomNavigationBar: BottomNavigationBar(
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: home,
+              activeIcon: homeActive,
+              title: Text(
+                '홈',
+                style: TextStyle(fontSize: 12),
+              ),
             ),
-          ),
-          BottomNavigationBarItem(
-            icon: search,
-            activeIcon: searchActive,
-            title: Text(
-              '탐색',
-              style: TextStyle(fontSize: 12),
+            BottomNavigationBarItem(
+              icon: search,
+              activeIcon: searchActive,
+              title: Text(
+                '탐색',
+                style: TextStyle(fontSize: 12),
+              ),
             ),
-          ),
-          BottomNavigationBarItem(
-            icon: feed,
-            activeIcon: feedActive,
-            title: Text(
-              '피드',
-              style: TextStyle(fontSize: 12),
+            BottomNavigationBarItem(
+              icon: feed,
+              activeIcon: feedActive,
+              title: Text(
+                '피드',
+                style: TextStyle(fontSize: 12),
+              ),
             ),
-          ),
-          BottomNavigationBarItem(
-            icon: wallet,
-            activeIcon: walletActive,
-            title: Text(
-              '지갑',
-              style: TextStyle(fontSize: 12),
+            BottomNavigationBarItem(
+              icon: wallet,
+              activeIcon: walletActive,
+              title: Text(
+                '지갑',
+                style: TextStyle(fontSize: 12),
+              ),
             ),
-          ),
-          BottomNavigationBarItem(
-            icon: profile,
-            activeIcon: profileActive,
-            title: Text(
-              '내 정보',
-              style: TextStyle(fontSize: 12),
+            BottomNavigationBarItem(
+              icon: profile,
+              activeIcon: profileActive,
+              title: Text(
+                '내 정보',
+                style: TextStyle(fontSize: 12),
+              ),
             ),
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Theme.of(context).primaryColor,
-        onTap: _onItemTapped,
-        type: BottomNavigationBarType.fixed,
-        selectedFontSize: 13,
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: Theme.of(context).primaryColor,
+          onTap: _onItemTapped,
+          type: BottomNavigationBarType.fixed,
+          selectedFontSize: 13,
+        ),
       ),
     );
   }

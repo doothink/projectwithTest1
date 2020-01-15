@@ -16,8 +16,7 @@ class SearchTotalMain extends StatefulWidget {
   SearchTotalMain({
     Key key,
     @required String searchValue,
-  })
-      : assert(searchValue != null),
+  })  : assert(searchValue != null),
         _searchValue = searchValue,
         super(key: key);
 
@@ -37,7 +36,6 @@ class _SearchTotalMainState extends State<SearchTotalMain> {
     _searchTotalBloc = BlocProvider.of<SearchTotalBloc>(context);
 //    _searchBloc.add(SearchTotalLoad(searchValue: _searchValue));
 //    _searchValueCurrent = _searchValue;
-
   }
 
   String _searchValueCurrent;
@@ -47,14 +45,8 @@ class _SearchTotalMainState extends State<SearchTotalMain> {
 
   @override
   Widget build(BuildContext context) {
-    double cardWidth = MediaQuery
-        .of(context)
-        .size
-        .width / 2;
-    double cardHeight = MediaQuery
-        .of(context)
-        .size
-        .height / 3.6;
+    double cardWidth = MediaQuery.of(context).size.width / 2;
+    double cardHeight = MediaQuery.of(context).size.height / 3.6;
 
     return BlocListener<SearchTotalBloc, SearchTotalState>(
       listener: (context, state) {
@@ -66,7 +58,6 @@ class _SearchTotalMainState extends State<SearchTotalMain> {
             _clubs = state.clubs;
             _members = state.members;
 //            _searchTotalBloc.close();
-
           });
         }
       },
@@ -83,10 +74,7 @@ class _SearchTotalMainState extends State<SearchTotalMain> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 8.0),
                           child: Container(
-                            width: MediaQuery
-                                .of(context)
-                                .size
-                                .width,
+                            width: MediaQuery.of(context).size.width,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
@@ -100,10 +88,7 @@ class _SearchTotalMainState extends State<SearchTotalMain> {
                                     )),
                                 Container(
                                   width:
-                                  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width * 0.66,
+                                      MediaQuery.of(context).size.width * 0.66,
                                   child: Divider(
 //                                          thickness: 4,
                                     color: Color.fromRGBO(88, 88, 88, 1),
@@ -115,87 +100,90 @@ class _SearchTotalMainState extends State<SearchTotalMain> {
                         ),
                         _members != null && _members.length > 0
                             ? Container(
-                          alignment: Alignment.centerLeft,
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              crossAxisAlignment:
-                              CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: _members
-                                  .map((item) =>
-                                  Container(
-                                    margin:
-                                    EdgeInsets.only(right: 10),
-                                    child: Column(
-                                      children: <Widget>[
-                                        GestureDetector(
-                                          onTap: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ProfileViewScreen(
-                                                        memberId:
-                                                        item.id,
-                                                      )),
-                                            );
-                                          },
-                                          child: CircleAvatar(
-                                            radius: 42.5,
-                                            child: ClipOval(
-                                              child: item.memberProfile
-                                                  .mediaCollections !=
-                                                  null &&
-                                                  item.memberProfile
-                                                      .mediaCollections[
-                                                  0] !=
-                                                      null &&
-                                                  item
-                                                      .memberProfile
-                                                      .mediaCollections[
-                                                  0]
-                                                      .fullPathS3 !=
-                                                      null
-                                                  ? CachedNetworkImage(
-                                                width: 85.0,
-                                                height: 85.0,
-                                                imageUrl: item
-                                                    .memberProfile
-                                                    .mediaCollections[
-                                                0]
-                                                    .fullPathS3,
-                                                fit: BoxFit
-                                                    .cover,
-                                                placeholder: (context,
-                                                    url) =>
-                                                new CircularProgressIndicator(),
-                                                errorWidget: (context,
-                                                    url,
-                                                    error) =>
-                                                new Icon(Icons
-                                                    .error),
-                                              )
-                                                  : Image.asset(
-                                                'assets/images/nophoto@3x.png',
-                                                width: 85.0,
-                                                height: 85.0,
-                                                fit: BoxFit
-                                                    .cover,
+                                alignment: Alignment.centerLeft,
+                                child: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: _members
+                                        .map((item) => Container(
+                                              margin:
+                                                  EdgeInsets.only(right: 10),
+                                              child: Column(
+                                                children: <Widget>[
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                ProfileViewScreen(
+                                                                  memberId:
+                                                                      item.id,
+                                                                )),
+                                                      );
+                                                    },
+                                                    child: CircleAvatar(
+                                                      radius: 42.5,
+                                                      child: ClipOval(
+                                                        child: item
+                                                                        .memberProfile !=
+                                                                    null &&
+                                                                item
+                                                                        .memberProfile
+                                                                        .mediaCollections !=
+                                                                    null &&
+                                                                item.memberProfile
+                                                                            .mediaCollections[
+                                                                        0] !=
+                                                                    null &&
+                                                                item
+                                                                        .memberProfile
+                                                                        .mediaCollections[
+                                                                            0]
+                                                                        .fullPathS3 !=
+                                                                    null
+                                                            ? CachedNetworkImage(
+                                                                width: 85.0,
+                                                                height: 85.0,
+                                                                imageUrl: item
+                                                                    .memberProfile
+                                                                    .mediaCollections[
+                                                                        0]
+                                                                    .fullPathS3,
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                                placeholder: (context,
+                                                                        url) =>
+                                                                    new CircularProgressIndicator(),
+                                                                errorWidget: (context,
+                                                                        url,
+                                                                        error) =>
+                                                                    new Icon(Icons
+                                                                        .error),
+                                                              )
+                                                            : Image.asset(
+                                                                'assets/images/nophoto@3x.png',
+                                                                width: 85.0,
+                                                                height: 85.0,
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                              ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Text(item.nickName != null
+                                                      ? item.nickName
+                                                      : item.firstName)
+                                                ],
                                               ),
-                                            ),
-                                          ),
-                                        ),
-                                        Text(item.nickName != null
-                                            ? item.nickName
-                                            : item.firstName)
-                                      ],
-                                    ),
-                                  ))
-                                  .toList(),
-                            ),
-                          ),
-                        )
+                                            ))
+                                        .toList(),
+                                  ),
+                                ),
+                              )
                             : EmptyWidget(),
                       ],
                     ),
@@ -207,10 +195,7 @@ class _SearchTotalMainState extends State<SearchTotalMain> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 8.0),
                           child: Container(
-                            width: MediaQuery
-                                .of(context)
-                                .size
-                                .width,
+                            width: MediaQuery.of(context).size.width,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
@@ -224,10 +209,7 @@ class _SearchTotalMainState extends State<SearchTotalMain> {
                                     )),
                                 Container(
                                   width:
-                                  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width * 0.66,
+                                      MediaQuery.of(context).size.width * 0.66,
                                   child: Divider(
 //                                          thickness: 4,
                                     color: Color.fromRGBO(88, 88, 88, 1),
@@ -239,89 +221,88 @@ class _SearchTotalMainState extends State<SearchTotalMain> {
                         ),
                         _clubs != null && _clubs.length > 0
                             ? Container(
-                          alignment: Alignment.centerLeft,
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              crossAxisAlignment:
-                              CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: _clubs
-                                  .map((item) =>
-                                  Container(
-                                    margin:
-                                    EdgeInsets.only(right: 10),
-                                    child: Column(
-                                      children: <Widget>[
-                                        GestureDetector(
-                                          onTap: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder:
-                                                      (context) =>
-                                                      ClubScreen(
-                                                        clubId:
-                                                        item.id,
-                                                      )),
-                                            );
-                                          },
-                                          child: CircleAvatar(
-                                            radius: 42.5,
-                                            child: ClipOval(
-                                              child: item.symbolImageUrl !=
-                                                  null
-                                                  ? CachedNetworkImage(
-                                                width: 85.0,
-                                                height: 85.0,
-                                                imageUrl: item
-                                                    .symbolImageUrl,
-                                                fit: BoxFit
-                                                    .cover,
-                                                placeholder: (context,
-                                                    url) =>
-                                                new CircularProgressIndicator(),
-                                                errorWidget: (context,
-                                                    url,
-                                                    error) =>
-                                                new Icon(Icons
-                                                    .error),
-                                              )
-                                                  : Image.asset(
-                                                'assets/images/nophoto@3x.png',
-                                                width: 85.0,
-                                                height: 85.0,
-                                                fit: BoxFit
-                                                    .cover,
+                                alignment: Alignment.centerLeft,
+                                child: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: _clubs
+                                        .map((item) => Container(
+                                              margin:
+                                                  EdgeInsets.only(right: 10),
+                                              child: Column(
+                                                children: <Widget>[
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder:
+                                                                (context) =>
+                                                                    ClubScreen(
+                                                                      clubId:
+                                                                          item.id,
+                                                                    )),
+                                                      );
+                                                    },
+                                                    child: CircleAvatar(
+                                                      radius: 42.5,
+                                                      child: ClipOval(
+                                                        child: item.symbolImageUrl !=
+                                                                null
+                                                            ? CachedNetworkImage(
+                                                                width: 85.0,
+                                                                height: 85.0,
+                                                                imageUrl: item
+                                                                    .symbolImageUrl,
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                                placeholder: (context,
+                                                                        url) =>
+                                                                    new CircularProgressIndicator(),
+                                                                errorWidget: (context,
+                                                                        url,
+                                                                        error) =>
+                                                                    new Icon(Icons
+                                                                        .error),
+                                                              )
+                                                            : Image.asset(
+                                                                'assets/images/nophoto@3x.png',
+                                                                width: 85.0,
+                                                                height: 85.0,
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                              ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 6.0),
+                                                    child: Text(
+                                                      item.name,
+                                                      style: const TextStyle(
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontFamily:
+                                                            "NotoSansCJKkr-Medium",
+                                                        fontStyle:
+                                                            FontStyle.normal,
+                                                        fontSize: 13.0,
+                                                      ),
+                                                    ),
+                                                  )
+                                                ],
                                               ),
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                          const EdgeInsets.only(
-                                              top: 6.0),
-                                          child: Text(
-                                            item.name,
-                                            style: const TextStyle(
-                                              color: Colors.black,
-                                              fontWeight:
-                                              FontWeight.w400,
-                                              fontFamily:
-                                              "NotoSansCJKkr-Medium",
-                                              fontStyle:
-                                              FontStyle.normal,
-                                              fontSize: 13.0,
-                                            ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ))
-                                  .toList(),
-                            ),
-                          ),
-                        )
+                                            ))
+                                        .toList(),
+                                  ),
+                                ),
+                              )
                             : EmptyWidget(),
                       ],
                     ),
@@ -329,10 +310,7 @@ class _SearchTotalMainState extends State<SearchTotalMain> {
                   Container(
                     margin: EdgeInsets.only(top: 30),
                     padding: EdgeInsets.only(bottom: 30),
-                    width: MediaQuery
-                        .of(context)
-                        .size
-                        .width,
+                    width: MediaQuery.of(context).size.width,
                     alignment: Alignment.centerLeft,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -340,10 +318,7 @@ class _SearchTotalMainState extends State<SearchTotalMain> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 8.0),
                           child: Container(
-                            width: MediaQuery
-                                .of(context)
-                                .size
-                                .width,
+                            width: MediaQuery.of(context).size.width,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
@@ -357,10 +332,7 @@ class _SearchTotalMainState extends State<SearchTotalMain> {
                                     )),
                                 Container(
                                   width:
-                                  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width * 0.66,
+                                      MediaQuery.of(context).size.width * 0.66,
                                   child: Divider(
 //                                          thickness: 4,
                                     color: Color.fromRGBO(88, 88, 88, 1),
@@ -372,20 +344,20 @@ class _SearchTotalMainState extends State<SearchTotalMain> {
                         ),
                         _jobInfos != null && _jobInfos.length > 0
                             ? GridView.count(
-                          primary: false,
-                          shrinkWrap: true,
-                          mainAxisSpacing: 4,
-                          crossAxisSpacing: 4,
-                          crossAxisCount: 2,
-                          childAspectRatio: cardWidth / cardHeight,
-                          children: List.generate(_jobInfos.length,
-                                  (index) {
-                                return SearchResultJobInfoCard(
-                                  cardHeight: cardHeight,
-                                  jobInfo: _jobInfos[index],
-                                );
-                              }),
-                        )
+                                primary: false,
+                                shrinkWrap: true,
+                                mainAxisSpacing: 4,
+                                crossAxisSpacing: 4,
+                                crossAxisCount: 2,
+                                childAspectRatio: cardWidth / cardHeight,
+                                children:
+                                    List.generate(_jobInfos.length, (index) {
+                                  return SearchResultJobInfoCard(
+                                    cardHeight: cardHeight,
+                                    jobInfo: _jobInfos[index],
+                                  );
+                                }),
+                              )
                             : EmptyWidget(),
                       ],
                     ),

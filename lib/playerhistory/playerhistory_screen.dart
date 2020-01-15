@@ -27,55 +27,60 @@ class _PlayerHistoryScreenState extends State<PlayerHistoryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color.fromRGBO(248, 248, 248, 1),
-      appBar: AppBar(
-        leading: new IconButton(
-          icon: new Icon(Icons.arrow_back_ios, color: Colors.black),
-          onPressed: () =>
-              Navigator.pop(context, _playerHistoryBloc.state.playerHistories),
-        ),
+    return WillPopScope(
+      onWillPop: () {
+        Navigator.pop(context, _playerHistoryBloc.state.playerHistories);
+      },
+      child: Scaffold(
         backgroundColor: Color.fromRGBO(248, 248, 248, 1),
+        appBar: AppBar(
+          leading: new IconButton(
+            icon: new Icon(Icons.arrow_back_ios, color: Colors.black),
+            onPressed: () => Navigator.pop(
+                context, _playerHistoryBloc.state.playerHistories),
+          ),
+          backgroundColor: Color.fromRGBO(248, 248, 248, 1),
 //        bottomOpacity: 0.1,
 //        elevation: 0.0,
-        title: const Text(
-          '출전 경기 히스토리',
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.w400,
-            fontFamily: "NotoSansCJKkr-Medium",
-            fontStyle: FontStyle.normal,
-            fontSize: 16.0,
-          ),
-        ),
-        actions: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: IconButton(
-              icon: Text(
-                "저장",
-                style: TextStyle(
-                  color: Color.fromRGBO(0, 166, 219, 1),
-                  fontWeight: FontWeight.w400,
-                  fontFamily: "NotoSansCJKkr-Medium",
-                  fontStyle: FontStyle.normal,
-                  fontSize: 16.0,
-                ),
-              ),
-              iconSize: 26,
-              onPressed: () {
-                _playerHistoryBloc.add(PlayerHistorySaveButtonPressed());
-              },
+          title: const Text(
+            '출전 경기 히스토리',
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w400,
+              fontFamily: "NotoSansCJKkr-Medium",
+              fontStyle: FontStyle.normal,
+              fontSize: 16.0,
             ),
           ),
-          // overflow menu
-        ],
+          actions: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: IconButton(
+                icon: Text(
+                  "저장",
+                  style: TextStyle(
+                    color: Color.fromRGBO(0, 166, 219, 1),
+                    fontWeight: FontWeight.w400,
+                    fontFamily: "NotoSansCJKkr-Medium",
+                    fontStyle: FontStyle.normal,
+                    fontSize: 16.0,
+                  ),
+                ),
+                iconSize: 26,
+                onPressed: () {
+                  _playerHistoryBloc.add(PlayerHistorySaveButtonPressed());
+                },
+              ),
+            ),
+            // overflow menu
+          ],
+        ),
+        body: BlocProvider<PlayerHistoryBloc>(
+            builder: (context) => _playerHistoryBloc,
+            child: SingleChildScrollView(
+              child: PlayerHistoryPost(),
+            )),
       ),
-      body: BlocProvider<PlayerHistoryBloc>(
-          builder: (context) => _playerHistoryBloc,
-          child: SingleChildScrollView(
-            child: PlayerHistoryPost(),
-          )),
     );
   }
 }

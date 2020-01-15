@@ -208,8 +208,12 @@ class _ProfileViewMainState extends State<ProfileViewMain> {
             _afterClubController.text = state.profile.afterClub;
             _movedAtController.text = state.profile.movedAt;
             _contractEndAtController.text = state.profile.contractEndAt;
-            _transferFeeController.text = state.profile.transferFee.toString();
-            _salaryController.text = state.profile.salary.toString();
+            _transferFeeController.text = state.profile.transferFee != null
+                ? state.profile.transferFee.toString()
+                : "";
+            _salaryController.text = state.profile.salary != null
+                ? state.profile.salary.toString()
+                : "";
 
             if (state.profile.memberSchools != null) {
               if (state.profile.memberSchools.length > 0) {
@@ -1549,6 +1553,7 @@ class _ProfileViewMainState extends State<ProfileViewMain> {
                                               ),
                                             ),
                                             TextFormField(
+                                              enabled: false,
                                               maxLength: 200,
                                               controller: _armyReasonController,
                                               maxLines: 1,
@@ -1613,7 +1618,7 @@ class _ProfileViewMainState extends State<ProfileViewMain> {
                                         ),
                                       )
                                     : EmptyWidget(),
-                               /* _injuaryHistoryList != null &&
+                                /* _injuaryHistoryList != null &&
                                         _injuaryHistoryList.length > 0
                                     ? Container(
                                         width:
